@@ -1,4 +1,6 @@
 ﻿using CarSales.Domain.Entities;
+using CarSales.Domain.Entities.CarDetails;
+using CarSales.Domain.Entities.Posts;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,5 +21,19 @@ namespace CarSales.Infrastructure.Data
         {
             base.OnModelCreating(builder);
         }
+        // Posts
+        public DbSet<NewCarPost> NewCarPosts { get; set; }
+        public DbSet<OldCarPost> OldCarPosts { get; set; }
+
+        // Images
+        public DbSet<NewCarImage> NewCarImages { get; set; }
+        public DbSet<UsedCarImage> UsedCarImages { get; set; }
+
+        // CarDetails
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Model> Models { get; set; }
+        public DbSet<FuelType> FuelTypes { get; set; }
+        public DbSet<TransmissionType> TransmissionTypes { get; set; }
+
     }
 }
