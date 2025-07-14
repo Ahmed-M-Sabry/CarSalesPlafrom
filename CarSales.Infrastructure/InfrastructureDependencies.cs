@@ -12,6 +12,11 @@ namespace CarSales.Infrastructure
             // Add your infrastructure dependencies here, e.g. DbContext, Repositories, etc.
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+
+
+
+
+
             return services;
         }
     }

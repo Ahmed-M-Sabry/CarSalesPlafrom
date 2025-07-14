@@ -1,4 +1,5 @@
-﻿using CarSales.Domain.Entities.Posts;
+﻿using CarSales.Domain.AuthenticationHepler;
+using CarSales.Domain.Entities.Posts;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,8 @@ namespace CarSales.Domain.Entities
 
         public ICollection<NewCarPost> NewCarPosts { get; set; }
         public ICollection<OldCarPost> OldCarPosts { get; set; }
- 
+
+        public List<RefreshToken>? refreshTokens { get; set; }
 
     }
 }

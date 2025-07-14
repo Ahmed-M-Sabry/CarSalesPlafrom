@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection; 
-using CarSales.Infrastructure;
+﻿using CarSales.API.Middleware;
 using CarSales.Application;
 using CarSales.Domain;
+using CarSales.Infrastructure;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection; 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .AddDomainDependencies()
     .AddApplicationDependencies()
+    .AuthenticationServices(builder.Configuration)
     .AddInfrastructureDependencies(builder.Configuration);
 
 
@@ -29,6 +31,7 @@ if (app.Environment.IsDevelopment())
         options.RoutePrefix = string.Empty; 
     });
 }
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using CarSales.Application.Features.AuthenticationFeatures.Command.Model;
+using CarSales.Application.Features.AuthenticationFeatures.Command.Validation;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -15,6 +18,8 @@ namespace CarSales.Application
             {
                 cfg.AddMaps(Assembly.GetExecutingAssembly());
             });
+
+            services.AddScoped<IValidator<AddNewUserCommand>, AddNewUserValidator>();
 
             return services;
         }
