@@ -221,6 +221,7 @@ public class IdentityServies : IIdentityServies
                 return null;
             return user;
         }
+
         public async Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password)
         {
             return await _userManager.CreateAsync(user, password);

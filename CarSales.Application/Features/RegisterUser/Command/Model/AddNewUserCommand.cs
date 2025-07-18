@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using CarSales.Application.Comman;
+using CarSales.Application.Features.RegisterUser.Command.Dtos;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CarSales.Application.Features.AuthenticationFeatures.Command.Model
 {
-    public class AddNewUserCommand : IRequest<string>
+    public class AddNewUserCommand : IRequest<ApiResponse<RegisterUserDto>>
     {
         public string FullName { get; set; }
         private string _email;

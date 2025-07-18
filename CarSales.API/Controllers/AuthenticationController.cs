@@ -13,9 +13,11 @@ namespace CarSales.API.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromForm] AddNewUserCommand command)
         {
-            var userId = await Mediator.Send(command);
-            return Created("", new { userId });
+            var result = await Mediator.Send(command);
+            return ResultStatusCode(result);
         }
+
+
     }
 
 }

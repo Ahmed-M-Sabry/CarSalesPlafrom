@@ -1,4 +1,6 @@
-﻿using CarSales.Infrastructure.Data;
+﻿using CarSales.Application.IServices;
+using CarSales.Infrastructure.Data;
+using CarSales.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +15,7 @@ namespace CarSales.Infrastructure
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 
-
+            services.AddTransient<IIdentityServies, IdentityServies>();
 
 
 
