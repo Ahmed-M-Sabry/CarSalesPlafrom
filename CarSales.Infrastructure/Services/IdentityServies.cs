@@ -33,7 +33,7 @@ public class IdentityServies : IIdentityServies
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<string> CreateJwtToken(ApplicationUser user)
+        public async Task<string> CreateJwtToken(ApplicationUser user, CancellationToken cancellationToken = default)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);
@@ -199,7 +199,7 @@ public class IdentityServies : IIdentityServies
             };
         }
 
-        public async Task<bool> IsEmailExist(string email)
+        public async Task<bool> IsEmailExist(string email, CancellationToken cancellationToken = default)
         {
             var user = await _userManager.FindByEmailAsync(email);
             return user != null;
@@ -222,7 +222,7 @@ public class IdentityServies : IIdentityServies
             return user;
         }
 
-        public async Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password)
+        public async Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password, CancellationToken cancellationToken = default)
         {
             return await _userManager.CreateAsync(user, password);
         }

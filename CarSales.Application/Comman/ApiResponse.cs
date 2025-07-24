@@ -35,8 +35,9 @@ namespace CarSales.Application.Comman
             StatusCode = succeeded ? HttpStatusCode.OK : HttpStatusCode.BadRequest;
         }
 
-        public static ApiResponse<T> Success(T data, string message = null, object meta = null) =>
-            new ApiResponse<T>(data, message) { Meta = meta, StatusCode = HttpStatusCode.OK };
+        public static ApiResponse<T> Success(T data, HttpStatusCode statusCode = HttpStatusCode.OK, string? message = null)
+            => new ApiResponse<T> { Data = data, StatusCode = statusCode, Message = message };
+
 
         public static ApiResponse<T> Fail(string message, HttpStatusCode statusCode = HttpStatusCode.BadRequest, List<string> errors = null) =>
             new ApiResponse<T>(message, false) { StatusCode = statusCode, Errors = errors };

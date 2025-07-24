@@ -1,0 +1,32 @@
+﻿using CarSales.Application.Comman;
+using CarSales.Application.Common;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
+
+namespace CarSales.API.ApplicationBase
+{
+
+    public static class ResultExtensions
+    {
+        public static IActionResult ResultStatusCode<T>(this Result<T> result)
+        {
+            if (result.IsSuccess)
+                return new OkObjectResult(ApiResponse<T>.Success(result.Value, HttpStatusCode.Created, "User created successfully"));
+
+            var statusCode = result.ErrorType switch
+            {
+                ErrorType.NotFound => HttpStatusCode.NotFound,
+                ErrorType.BadRequest => HttpStatusCode.BadRequest,
+                ErrorType.Conflict => HttpStatusCode.Conflict,
+                ErrorType.UnprocessableEntity => HttpStatusCode.UnprocessableEntity,
+                ErrorType.InternalServerError => HttpStatusCode.InternalServerError,
+                _ => HttpStatusCode.InternalServerError
+            };
+
+            return new ObjectResult(ApiResponse<T>.Fail(result.Error, statusCode))
+            {
+                StatusCode = (int)statusCode
+            };
+        }
+    }
+}

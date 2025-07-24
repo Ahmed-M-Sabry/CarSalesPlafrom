@@ -11,13 +11,14 @@ namespace CarSales.Application.IServices
 {
     public interface IIdentityServies
     {
-        Task<string> CreateJwtToken(ApplicationUser user);
         Task<ResponseAuthModel> RefreshTokenAsunc(string token);
         Task<ResponseAuthModel> GenerateAuthModelAsync(ApplicationUser user, bool rememberMe);
         Task<bool> RevokeRefreshTokenFromCookiesAsync();
         Task<bool> IsInRole(string userId, string role);
-        Task<bool> IsEmailExist(string email);
         Task<ApplicationUser> IsUserExist(string userId);
-        Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password);
+
+        Task<bool> IsEmailExist(string email, CancellationToken cancellationToken = default);
+        Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password, CancellationToken cancellationToken = default);
+        Task<string> CreateJwtToken(ApplicationUser user, CancellationToken cancellationToken = default);
     }
 }
