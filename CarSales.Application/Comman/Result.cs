@@ -10,27 +10,27 @@ namespace CarSales.Application.Common
     {
         public bool IsSuccess { get; }
         public T Value { get; }
-        public string Error { get; }
+        public string Message { get; } 
         public ErrorType ErrorType { get; }
 
-        private Result(T value)
+        private Result(T value, string message = null)
         {
             IsSuccess = true;
             Value = value;
-            Error = null;
+            Message = message;
             ErrorType = ErrorType.None;
         }
 
-        private Result(string error, ErrorType errorType)
+        private Result(string message, ErrorType errorType)
         {
             IsSuccess = false;
             Value = default;
-            Error = error;
+            Message = message;
             ErrorType = errorType;
         }
 
-        public static Result<T> Success(T value) => new Result<T>(value);
-        public static Result<T> Failure(string error, ErrorType errorType) => new Result<T>(error, errorType);
+        public static Result<T> Success(T value, string message = null) => new Result<T>(value, message);
+        public static Result<T> Failure(string message, ErrorType errorType) => new Result<T>(message, errorType);
     }
 
     public enum ErrorType

@@ -11,7 +11,11 @@ namespace CarSales.API.ApplicationBase
         public static IActionResult ResultStatusCode<T>(this Result<T> result)
         {
             if (result.IsSuccess)
-                return new OkObjectResult(ApiResponse<T>.Success(result.Value, HttpStatusCode.Created, "User created successfully"));
+                return new OkObjectResult(ApiResponse<T>.Success(
+                    result.Value,
+                    HttpStatusCode.OK,
+                    result.Message ?? "Success"
+                ));
 
             var statusCode = result.ErrorType switch
             {
@@ -24,10 +28,11 @@ namespace CarSales.API.ApplicationBase
                 _ => HttpStatusCode.InternalServerError
             };
 
-            return new ObjectResult(ApiResponse<T>.Fail(result.Error, statusCode))
+            return new ObjectResult(ApiResponse<T>.Fail(result.Message, statusCode))
             {
                 StatusCode = (int)statusCode
             };
         }
+
     }
 }

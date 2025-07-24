@@ -36,10 +36,10 @@ namespace CarSales.Application.Comman
         }
 
         public static ApiResponse<T> Success(T data, HttpStatusCode statusCode = HttpStatusCode.OK, string? message = null)
-            => new ApiResponse<T> { Data = data, StatusCode = statusCode, Message = message };
+            => new ApiResponse<T> { Data = data, StatusCode = statusCode, Message = message , Succeeded = true };
 
 
         public static ApiResponse<T> Fail(string message, HttpStatusCode statusCode = HttpStatusCode.BadRequest, List<string> errors = null) =>
-            new ApiResponse<T>(message, false) { StatusCode = statusCode, Errors = errors };
+            new ApiResponse<T>(message, false) { StatusCode = statusCode, Errors = errors, Succeeded = false };
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CarSales.API.ApplicationBase;
 using CarSales.Application.Features.AuthenticationFeatures.LoginUser.Command.Model;
+using CarSales.Application.Features.AuthenticationFeatures.RefreshToken.Model;
 using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Model;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -11,14 +12,7 @@ namespace CarSales.API.Controllers
     [ApiController]
     public class AuthenticationController : ApplicationControllerBase
     {
-        /// <summary>
-        /// Registers a new user.
-        /// </summary>
-        /// <param name="command">The user registration data.</param>
-        /// <returns>An ApiResponse containing the registered user data or errors.</returns>
-        /// <response code="201">User created successfully.</response>
-        /// <response code="400">Validation errors occurred.</response>
-        /// <response code="409">Email already registered.</response>
+
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromForm] AddNewUserCommand command)
         {
@@ -26,10 +20,28 @@ namespace CarSales.API.Controllers
             return result.ResultStatusCode();
         }
 
+
         [HttpPost("Login")]
         public async Task<IActionResult> UserLogin([FromForm] UserLogInCommand command)
         {
             var result = await Mediator.Send(command);
+            if (result.IsSuccess && result.Value?.RefreshToken != null && result.Value.CookieOptions != null)
+            {
+                Response.Cookies.Append("RefreshToken", result.Value.RefreshToken, result.Value.CookieOptions);
+            }
+            return result.ResultStatusCode();
+        }
+
+        [HttpPost("Generate-New-token-From-RefreshToken")]
+        public async Task<IActionResult> RefreshToken()
+        {
+            var result = await Mediator.Send(new RefreshTokenCommand());
+
+            if (result.IsSuccess && result.Value?.RefreshToken != null && result.Value.CookieOptions != null)
+            {
+                Response.Cookies.Delete("RefreshToken");
+                Response.Cookies.Append("RefreshToken", result.Value.RefreshToken, result.Value.CookieOptions);
+            }
             return result.ResultStatusCode();
         }
 
