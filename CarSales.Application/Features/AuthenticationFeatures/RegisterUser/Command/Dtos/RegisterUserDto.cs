@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Application.Features.RegisterUser.Command.Dtos
+namespace CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Dtos
 {
     public class RegisterUserDto
     {

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using CarSales.Application.Features.AuthenticationFeatures.Command.Model;
-using CarSales.Application.Features.AuthenticationFeatures.Command.Validation;
+using CarSales.Application.Features.AuthenticationFeatures.LoginUser.Command.Model;
+using CarSales.Application.Features.AuthenticationFeatures.LoginUser.Command.Validator;
+using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Model;
+using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Validation;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,7 @@ namespace CarSales.Application
             });
 
             services.AddScoped<IValidator<AddNewUserCommand>, AddNewUserValidator>();
+            services.AddScoped<IValidator<UserLogInCommand>, UserLogInValidator>();
 
             return services;
         }

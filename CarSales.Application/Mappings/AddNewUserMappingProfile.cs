@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CarSales.Application.Features.AuthenticationFeatures.Command.Model;
+using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Model;
 using CarSales.Domain.Entities;
 using System;
 using System.Collections.Generic;

@@ -20,6 +20,7 @@ namespace CarSales.API.ApplicationBase
                 ErrorType.Conflict => HttpStatusCode.Conflict,
                 ErrorType.UnprocessableEntity => HttpStatusCode.UnprocessableEntity,
                 ErrorType.InternalServerError => HttpStatusCode.InternalServerError,
+                ErrorType.Unauthorized => HttpStatusCode.Unauthorized,
                 _ => HttpStatusCode.InternalServerError
             };
 

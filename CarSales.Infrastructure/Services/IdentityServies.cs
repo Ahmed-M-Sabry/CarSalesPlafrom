@@ -156,7 +156,7 @@ public class IdentityServies : IIdentityServies
             };
         }
 
-        public async Task<ResponseAuthModel> GenerateAuthModelAsync(ApplicationUser user, bool rememberMe)
+        public async Task<ResponseAuthModel> GenerateRefreshTokenAsync(ApplicationUser user, bool rememberMe, CancellationToken cancellationToken = default)
         {
             var jwtToken = await CreateJwtToken(user);
 
@@ -227,5 +227,17 @@ public class IdentityServies : IIdentityServies
             return await _userManager.CreateAsync(user, password);
         }
 
+        public async Task<bool> IsPasswordExist(ApplicationUser user, string Password, CancellationToken cancellationToken = default)
+        {
+            var result = await _userManager.CheckPasswordAsync(user, Password);
+            return result;
+        }
+
+        public async Task<ApplicationUser?> GetUserByEmailAsync(string email, CancellationToken cancellationToken = default)
+        {
+            var result =  await _userManager.FindByEmailAsync(email);
+
+            return result;
+        }
     }
 }

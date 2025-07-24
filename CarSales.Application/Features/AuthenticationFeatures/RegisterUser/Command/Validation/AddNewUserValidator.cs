@@ -1,4 +1,4 @@
-﻿using CarSales.Application.Features.AuthenticationFeatures.Command.Model;
+﻿using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Model;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Application.Features.AuthenticationFeatures.Command.Validation
+namespace CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Validation
 {
     public class AddNewUserValidator : AbstractValidator<AddNewUserCommand>
     {

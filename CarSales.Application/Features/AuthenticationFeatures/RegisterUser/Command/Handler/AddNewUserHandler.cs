@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CarSales.Application.Common;
-using CarSales.Application.Features.AuthenticationFeatures.Command.Model;
-using CarSales.Application.Features.RegisterUser.Command.Dtos;
+using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Dtos;
+using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Model;
 using CarSales.Application.IServices;
 using CarSales.Domain.Entities;
 using FluentValidation;
@@ -9,22 +9,19 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace CarSales.Application.Features.AuthenticationFeatures.Command.Handler
+namespace CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Handler
 {
     public class AddNewUserHandler : IRequestHandler<AddNewUserCommand, Result<RegisterUserDto>>
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IIdentityServies _identityServies;
         private readonly IValidator<AddNewUserCommand> _validator;
         private readonly IMapper _mapper;
 
         public AddNewUserHandler(
-            UserManager<ApplicationUser> userManager,
             IValidator<AddNewUserCommand> validator,
             IMapper mapper,
             IIdentityServies identityServies)
         {
-            _userManager = userManager;
             _validator = validator;
             _mapper = mapper;
             _identityServies = identityServies;

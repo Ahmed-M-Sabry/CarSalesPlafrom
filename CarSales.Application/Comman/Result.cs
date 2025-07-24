@@ -40,6 +40,7 @@ namespace CarSales.Application.Common
         BadRequest,
         Conflict,
         UnprocessableEntity,
-        InternalServerError
+        InternalServerError,
+        Unauthorized
     }
 }

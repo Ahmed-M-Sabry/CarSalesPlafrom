@@ -1,6 +1,6 @@
 ﻿using CarSales.Application.Comman;
 using CarSales.Application.Common;
-using CarSales.Application.Features.RegisterUser.Command.Dtos;
+using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Dtos;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Application.Features.AuthenticationFeatures.Command.Model
+namespace CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Model
 {
     public class AddNewUserCommand : IRequest<Result<RegisterUserDto>>
     {
