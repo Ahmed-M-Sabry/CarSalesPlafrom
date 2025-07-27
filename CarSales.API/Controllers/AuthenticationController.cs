@@ -1,5 +1,6 @@
 ﻿using CarSales.API.ApplicationBase;
 using CarSales.Application.Features.AuthenticationFeatures.LoginUser.Command.Model;
+using CarSales.Application.Features.AuthenticationFeatures.Logout.Command;
 using CarSales.Application.Features.AuthenticationFeatures.RefreshToken.Model;
 using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Model;
 using MediatR;
@@ -44,6 +45,20 @@ namespace CarSales.API.Controllers
             }
             return result.ResultStatusCode();
         }
+
+        [HttpPost("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var result = await Mediator.Send(new UserLogoutCommand());
+            
+            return result.ResultStatusCode();
+        }
+
+        // To Do
+        // 2- Add EndPoint to Get Token To Rest Password
+
+        // 3- Add Endpoint To Change Password From Gmail 
+
 
 
     }
