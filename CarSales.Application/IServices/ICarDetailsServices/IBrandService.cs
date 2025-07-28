@@ -14,7 +14,8 @@ namespace CarSales.Application.IServices.CarDetailsServices
         Task DeleteAsync(int id); 
         Task<Brand> CreateAsync(Brand brand);
         Task UpdateAsync(Brand brand);
+        Task<Brand> RestoreAsync(Brand brand);
 
-            
+
     }
 }

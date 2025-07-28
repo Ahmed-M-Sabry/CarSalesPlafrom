@@ -31,6 +31,15 @@ namespace CarSales.Infrastructure.Repositories.CarDetailsRepo
             _context.FuelTypes.Update(fuelType);
             await _context.SaveChangesAsync();
         }
+        public async Task<FuelType> RestoreAsync(FuelType fuel)
+        {
+
+            fuel.IsDeleted = false;
+            _context.FuelTypes.Update(fuel);
+            await _context.SaveChangesAsync();
+            return fuel;
+        }
+
     }
 
 }

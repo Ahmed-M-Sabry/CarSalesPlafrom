@@ -32,8 +32,6 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
         public async Task<FuelType> GetByIdAsync(int id)
         {
             var fuelType = await _fuelTypeRepository.GetByIdAsync(id);
-            if (fuelType == null || fuelType.IsDeleted)
-                throw new Exception("FuelType not found");
 
             return fuelType;
         }
@@ -43,13 +41,13 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
             await _fuelTypeRepository.UpdateAsync(fuelType);
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(FuelType fuelType)
         {
-            var fuelType = await _fuelTypeRepository.GetByIdAsync(id);
-            if (fuelType == null)
-                throw new Exception("FuelType not found");
-
             await _fuelTypeRepository.SoftDeleteAsync(fuelType);
+        }
+        public async Task<FuelType> RestoreAsync(FuelType fuelType)
+        {
+            return await _fuelTypeRepository.RestoreAsync(fuelType);
         }
     }
 

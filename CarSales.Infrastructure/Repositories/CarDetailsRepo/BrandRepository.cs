@@ -31,7 +31,14 @@ namespace CarSales.Infrastructure.Repositories.CarDetailsRepo
                 .Where(b => !b.IsDeleted)
                 .ToListAsync();
         }
-
+        public async Task<Brand> RestoreAsync(Brand brand)
+        {
+            brand.IsDeleted = false;
+            _context.Brands.Update(brand);
+            await _context.SaveChangesAsync();
+            return brand;
+        }
+    
     }
 
 }

@@ -13,7 +13,9 @@ namespace CarSales.Application.IServices.CarDetailsServices
         Task<IEnumerable<FuelType>> GetAllAsync();
         Task<FuelType> CreateAsync(FuelType fuelType);
         Task UpdateAsync(FuelType fuelType);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(FuelType fuelType);
+        Task<FuelType> RestoreAsync(FuelType fuelType);
+
     }
 
 }

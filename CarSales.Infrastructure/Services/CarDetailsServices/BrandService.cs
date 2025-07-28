@@ -45,5 +45,9 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
         {
             await _brandRepository.UpdateAsync(brand);
         }
+        public async Task<Brand> RestoreAsync(Brand brand)
+        {
+            return await _brandRepository.RestoreAsync(brand);
+        }
     }
 }
