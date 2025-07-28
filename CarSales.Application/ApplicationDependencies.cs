@@ -3,6 +3,8 @@ using CarSales.Application.Features.AuthenticationFeatures.LoginUser.Command.Mod
 using CarSales.Application.Features.AuthenticationFeatures.LoginUser.Command.Validator;
 using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Model;
 using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Validation;
+using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Commands.Models;
+using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Commands.Validator;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +25,7 @@ namespace CarSales.Application
 
             services.AddScoped<IValidator<AddNewUserCommand>, AddNewUserValidator>();
             services.AddScoped<IValidator<UserLogInCommand>, UserLogInValidator>();
+            services.AddScoped<IValidator<CreateBrandCommand>, CreateBrandValidator>();
 
             return services;
         }

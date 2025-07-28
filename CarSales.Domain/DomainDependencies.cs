@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CarSales.Domain.IRepositories.ICarDetailsRepo;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CarSales.Domain
@@ -7,6 +8,7 @@ namespace CarSales.Domain
     {
         public static IServiceCollection AddDomainDependencies(this IServiceCollection services)
         {
+
 
 
             return services;

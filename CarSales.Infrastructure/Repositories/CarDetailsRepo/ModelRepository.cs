@@ -1,5 +1,7 @@
 ﻿using CarSales.Domain.Entities.CarDetails;
 using CarSales.Domain.IRepositories.ICarDetailsRepo;
+using CarSales.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +12,8 @@ namespace CarSales.Infrastructure.Repositories.CarDetailsRepo
 {
     public class ModelRepository : IModelRepository
     {
-        private readonly AppDbContext _context;
-        public ModelRepository(AppDbContext context)
+        private readonly ApplicationDbContext _context;
+        public ModelRepository(ApplicationDbContext context)
         {
             _context = context;
         }

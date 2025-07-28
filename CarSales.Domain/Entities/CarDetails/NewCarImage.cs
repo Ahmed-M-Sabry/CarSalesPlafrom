@@ -10,7 +10,6 @@ namespace CarSales.Domain.Entities.CarDetails
 {
     public class NewCarImage
     {
-
         public int Id { get; set; }
 
         public string Url { get; set; }
@@ -19,6 +18,5 @@ namespace CarSales.Domain.Entities.CarDetails
 
         public int NewCarPostId { get; set; }
         public NewCarPost NewCarPost { get; set; }
-
     }
 }
