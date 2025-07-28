@@ -26,6 +26,7 @@ namespace CarSales.Application
             services.AddScoped<IValidator<AddNewUserCommand>, AddNewUserValidator>();
             services.AddScoped<IValidator<UserLogInCommand>, UserLogInValidator>();
             services.AddScoped<IValidator<CreateBrandCommand>, CreateBrandValidator>();
+            services.AddScoped<IValidator<EditBrandCommand>, EditBrandValidator>();
 
             return services;
         }

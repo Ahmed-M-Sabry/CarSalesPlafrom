@@ -16,10 +16,13 @@ namespace CarSales.API.Controllers
         [HttpPost("Create-Brand")]
         public async Task<IActionResult> CreateBrand([FromForm] CreateBrandCommand command)
         {
-            Console.WriteLine("🟡 دخلنا الكنترولر!");
-
             var result = await Mediator.Send(command);
-
+            return result.ResultStatusCode();
+        }
+        [HttpPost("Edit-Brand")]
+        public async Task<IActionResult> EditBrand([FromForm] EditBrandCommand command)
+        {
+            var result = await Mediator.Send(command);
             return result.ResultStatusCode();
         }
     }
