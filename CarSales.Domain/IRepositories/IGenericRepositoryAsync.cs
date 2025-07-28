@@ -11,6 +11,7 @@ namespace CarSales.Domain.IRepositories
     {
         Task DeleteRangeAsync(ICollection<T> entities);
         Task<T> GetByIdAsync(int id);
+        Task<IEnumerable<T>> GetAllAsync();
         Task SaveChangesAsync();
         IDbContextTransaction BeginTransaction();
         void Commit();

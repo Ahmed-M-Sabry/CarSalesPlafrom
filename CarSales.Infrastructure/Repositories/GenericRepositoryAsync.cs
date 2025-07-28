@@ -117,6 +117,11 @@ namespace CarSales.Infrastructure.Repositories
             _dbContext.Set<T>().UpdateRange(entities);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return _dbContext.Set<T>().AsNoTracking().AsQueryable().ToList();
+        }
         #endregion
     }
 }
