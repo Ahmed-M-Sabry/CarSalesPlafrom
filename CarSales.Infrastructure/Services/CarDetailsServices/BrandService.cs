@@ -29,10 +29,8 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
             return await _brandRepository.GetAllActiveAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Brand brand)
         {
-            var brand = await _brandRepository.GetByIdAsync(id);
-
             await _brandRepository.SoftDeleteAsync(brand);
         }
 
@@ -48,6 +46,16 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
         public async Task<Brand> RestoreAsync(Brand brand)
         {
             return await _brandRepository.RestoreAsync(brand);
+        }
+
+        public async Task<IEnumerable<Brand>> GetAllActiveAsync()
+        {
+            return await _brandRepository.GetAllActiveAsync();
+        }
+
+        public async Task<Brand> NameIsExistAsync(string name, CancellationToken cancellationToken)
+        {
+            return await _brandRepository.NameIsExistAsync(name);
         }
     }
 }

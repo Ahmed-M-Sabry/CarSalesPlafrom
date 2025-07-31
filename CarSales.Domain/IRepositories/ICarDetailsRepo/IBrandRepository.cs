@@ -12,6 +12,8 @@ namespace CarSales.Domain.IRepositories.CarDetailsRepo
         Task SoftDeleteAsync(Brand brand);
         Task<IEnumerable<Brand>> GetAllActiveAsync();
         Task<Brand> RestoreAsync(Brand brand);
+        Task<Brand> NameIsExistAsync(string name);
+
 
     }
 }

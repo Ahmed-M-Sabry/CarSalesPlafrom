@@ -43,6 +43,12 @@ namespace CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Command
             if(isExits is null)
                 return Result<Brand>.Failure($"Brand not found with id {request.Id}", ErrorType.NotFound);
 
+            var nameIsExist = await _brandService.NameIsExistAsync(request.Name, cancellationToken);
+            if (nameIsExist is not null && nameIsExist.Id != request.Id)
+            {
+                return Result<Brand>.Failure($"Brand with name {request.Name} already exists || Deleted : {nameIsExist.IsDeleted} With ID {nameIsExist.Id}.", ErrorType.BadRequest);
+            }
+
             if (isExits.IsDeleted)
                 return Result<Brand>.Failure($"{request.Id} Is Deleted" , ErrorType.BadRequest);
 

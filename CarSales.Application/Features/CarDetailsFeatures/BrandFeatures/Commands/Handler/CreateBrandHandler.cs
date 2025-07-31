@@ -1,4 +1,5 @@
-﻿using CarSales.Application.Common;
+﻿using CarSales.Application.Comman;
+using CarSales.Application.Common;
 using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Model;
 using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Commands.Validator;
@@ -33,6 +34,13 @@ namespace CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Command
             {
                 var errors = Validator.Errors.Select(e => e.ErrorMessage).ToList();
                 return Result<Brand>.Failure(string.Join(" | ", errors), ErrorType.BadRequest);
+            }
+
+            // Name is Exist or not
+            var nameIsExist = await _brandService.NameIsExistAsync(request.Name, cancellationToken);
+            if(nameIsExist is not null)
+            {
+                return Result<Brand>.Failure($"Brand with name {request.Name} already exists || Deleted : {nameIsExist.IsDeleted} With ID {nameIsExist.Id}.", ErrorType.BadRequest);
             }
 
             var brand = new Brand { Name = request.Name };

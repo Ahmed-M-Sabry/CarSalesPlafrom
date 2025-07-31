@@ -9,13 +9,14 @@ namespace CarSales.Application.IServices.CarDetailsServices
 {
     public interface IBrandService
     {
-        Task<Brand> GetByIdAsync(int id);
         Task<IEnumerable<Brand>> GetAllAsync(); 
-        Task DeleteAsync(int id); 
+        Task<IEnumerable<Brand>> GetAllActiveAsync();
+        Task<Brand> GetByIdAsync(int id);
         Task<Brand> CreateAsync(Brand brand);
         Task UpdateAsync(Brand brand);
+        Task DeleteAsync(Brand brand); 
         Task<Brand> RestoreAsync(Brand brand);
-
+        Task<Brand> NameIsExistAsync(string name, CancellationToken cancellationToken);
 
     }
 }
