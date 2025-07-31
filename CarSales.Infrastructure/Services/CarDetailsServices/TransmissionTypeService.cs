@@ -50,6 +50,15 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
             return await _transmissionTypeRepository.RestoreAsync(transmissionType);
         }
 
+        public async Task<TransmissionType> NameIsExistAsync(string name, CancellationToken cancellationToken)
+        {
+            return await _transmissionTypeRepository.NameIsExistAsync(name, cancellationToken);
+        }
+
+        public async Task<IEnumerable<TransmissionType>> GetAllActiveAsync()
+        {
+            return await _transmissionTypeRepository.GetAllActiveAsync();
+        }
     }
 
 }

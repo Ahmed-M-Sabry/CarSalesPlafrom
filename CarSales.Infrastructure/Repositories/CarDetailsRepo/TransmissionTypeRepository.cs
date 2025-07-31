@@ -40,6 +40,12 @@ namespace CarSales.Infrastructure.Repositories.CarDetailsRepo
             return item;
         }
 
+        public  async Task<TransmissionType> NameIsExistAsync(string name, CancellationToken cancellationToken)
+        {
+            return await _context.TransmissionTypes
+                .AsNoTracking()
+                .FirstOrDefaultAsync(t => t.Name.ToLower() == name.ToLower());
+        }
     }
 
 }

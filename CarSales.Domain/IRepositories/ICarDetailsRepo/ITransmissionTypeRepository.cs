@@ -12,6 +12,7 @@ namespace CarSales.Domain.IRepositories.ICarDetailsRepo
         Task<IEnumerable<TransmissionType>> GetAllActiveAsync();
         Task SoftDeleteAsync(TransmissionType transmissionType);
         Task<TransmissionType> RestoreAsync(TransmissionType item);
+        Task<TransmissionType> NameIsExistAsync(string name, CancellationToken cancellationToken);
 
     }
 

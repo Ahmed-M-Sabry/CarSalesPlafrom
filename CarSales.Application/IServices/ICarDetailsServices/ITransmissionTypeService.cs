@@ -15,6 +15,8 @@ namespace CarSales.Application.IServices.ICarDetailsServices
         Task UpdateAsync(TransmissionType transmissionType);
         Task DeleteAsync(TransmissionType transmissionType);
         Task<TransmissionType> RestoreAsync(TransmissionType transmissionType);
+        Task<TransmissionType> NameIsExistAsync(string name, CancellationToken cancellationToken);
+        Task<IEnumerable<TransmissionType>> GetAllActiveAsync();
 
     }
 
