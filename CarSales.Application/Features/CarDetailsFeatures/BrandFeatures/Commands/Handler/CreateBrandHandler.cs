@@ -3,6 +3,7 @@ using CarSales.Application.Common;
 using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Model;
 using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Commands.Validator;
+using CarSales.Application.IServices;
 using CarSales.Application.IServices.CarDetailsServices;
 using CarSales.Domain.Entities.CarDetails;
 using CarSales.Domain.IRepositories.CarDetailsRepo;
@@ -20,15 +21,24 @@ namespace CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Command
     {
         private readonly IBrandService _brandService;
         private readonly IValidator<CreateBrandCommand> _validator;
+        private readonly IIdentityServies _identityServices;
 
         public CreateBrandHandler(IBrandService brandService
-            , IValidator<CreateBrandCommand> validator)
+            , IValidator<CreateBrandCommand> validator
+            , IIdentityServies identityServices)
         {
             _brandService = brandService;
             _validator = validator;
+            _identityServices = identityServices;
         }
         public async Task<Result<Brand>> Handle(CreateBrandCommand request, CancellationToken cancellationToken)
         {
+            // Check if the current user is Admin
+            //if (!await _identityServices.IsUserAdmin(cancellationToken))
+            //{
+            //    return Result<Brand>.Failure("You must be an Admin to create a brand.", ErrorType.Unauthorized);
+            //}
+
             var Validator = await _validator.ValidateAsync(request, cancellationToken);
             if (!Validator.IsValid)
             {

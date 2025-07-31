@@ -11,7 +11,9 @@ using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Mo
 using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Validator;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Validator;
+using CarSales.Application.PipelineBehaviors;
 using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -23,7 +25,13 @@ namespace CarSales.Application
         public static IServiceCollection AddApplicationDependencies(this IServiceCollection services)
         {
 
-            services.AddMediatR(c => c.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+            //services.AddMediatR(c => c.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
+            });
+
             services.AddAutoMapper(cfg =>
             {
                 cfg.AddMaps(Assembly.GetExecutingAssembly());

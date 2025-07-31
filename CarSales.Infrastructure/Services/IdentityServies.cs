@@ -1,4 +1,5 @@
-﻿using CarSales.Application.IServices;
+﻿using CarSales.Application.Comman;
+using CarSales.Application.IServices;
 using CarSales.Domain.AuthenticationHepler;
 using CarSales.Domain.Entities;
 using CarSales.Domain.IRepositories;
@@ -224,7 +225,8 @@ public class IdentityServies : IIdentityServies
 
         public async Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password, CancellationToken cancellationToken = default)
         {
-            return await _userManager.CreateAsync(user, password);
+            await _userManager.CreateAsync(user, password);
+            return await _userManager.AddToRoleAsync(user, ApplicationRoles.User);
         }
 
         public async Task<bool> IsPasswordExist(ApplicationUser user, string Password, CancellationToken cancellationToken = default)
@@ -239,5 +241,7 @@ public class IdentityServies : IIdentityServies
 
             return result;
         }
+
+
     }
 }

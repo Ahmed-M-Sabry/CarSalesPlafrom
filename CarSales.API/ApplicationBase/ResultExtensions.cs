@@ -10,6 +10,14 @@ namespace CarSales.API.ApplicationBase
     {
         public static IActionResult ResultStatusCode<T>(this Result<T> result)
         {
+            if (result == null)
+            {
+                return new ObjectResult(ApiResponse<T>.Fail("Unexpected error occurred.", HttpStatusCode.InternalServerError))
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
+            }
+
             if (result.IsSuccess)
                 return new OkObjectResult(ApiResponse<T>.Success(
                     result.Value,

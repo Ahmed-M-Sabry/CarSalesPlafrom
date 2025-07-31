@@ -1,4 +1,5 @@
 ﻿using CarSales.API.ApplicationBase;
+using CarSales.Application.Comman;
 using CarSales.Application.Common;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Queries.Models;
@@ -10,7 +11,7 @@ namespace CarSales.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = ApplicationRoles.Admin)]
+    [Authorize(Roles = ApplicationRoles.Admin)]
     public class TransmissionTypeController : ApplicationControllerBase
     {
         [HttpPost("Create-TransmissionType")]

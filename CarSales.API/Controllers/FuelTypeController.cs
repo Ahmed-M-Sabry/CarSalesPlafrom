@@ -1,7 +1,9 @@
 ﻿using CarSales.API.ApplicationBase;
+using CarSales.Application.Comman;
 using CarSales.Application.Features.CarDetailsFeatures.FuelTypeFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.FuelTypeFeatures.Queries.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +11,7 @@ namespace CarSales.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = ApplicationRoles.Admin)]
     public class FuelTypeController :  ApplicationControllerBase
     {
 

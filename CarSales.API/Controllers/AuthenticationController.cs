@@ -3,9 +3,12 @@ using CarSales.Application.Features.AuthenticationFeatures.LoginUser.Command.Mod
 using CarSales.Application.Features.AuthenticationFeatures.Logout.Command;
 using CarSales.Application.Features.AuthenticationFeatures.RefreshToken.Model;
 using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Model;
+using CarSales.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace CarSales.API.Controllers
 {
@@ -60,7 +63,16 @@ namespace CarSales.API.Controllers
 
         // 3- Add Endpoint To Change Password From Gmail 
 
+        //using Microsoft.AspNetCore.Identity;
+        //[HttpGet("aaa")]
+        //    public async Task<IActionResult> C()
+        //    {
 
+        //    var hasher = new PasswordHasher<ApplicationUser>();
+        //        var user = new ApplicationUser { Id = "admin-user-id", UserName = "admin@carsales.com" };
+        //        var hashedPassword = hasher.HashPassword(user, "Aa123**");
+        //        return Ok(hashedPassword);
+        //     }
 
     }
 
