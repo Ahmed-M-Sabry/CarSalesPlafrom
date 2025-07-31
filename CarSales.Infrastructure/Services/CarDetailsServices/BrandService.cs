@@ -26,7 +26,7 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
 
         public async Task<IEnumerable<Brand>> GetAllAsync()
         {
-            return await _brandRepository.GetAllActiveAsync();
+            return await _brandRepository.GetAllAsync();
         }
 
         public async Task DeleteAsync(Brand brand)

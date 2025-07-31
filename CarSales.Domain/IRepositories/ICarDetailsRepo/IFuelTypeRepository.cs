@@ -12,7 +12,7 @@ namespace CarSales.Domain.IRepositories.CarDetailsRepo
         Task<IEnumerable<FuelType>> GetAllActiveAsync();
         Task SoftDeleteAsync(FuelType fuelType);
         Task<FuelType> RestoreAsync(FuelType fuel);
-
+        Task<FuelType> NameIsExistAsync(string name);
     }
 
 }

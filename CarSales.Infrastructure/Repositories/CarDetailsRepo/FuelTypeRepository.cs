@@ -39,7 +39,13 @@ namespace CarSales.Infrastructure.Repositories.CarDetailsRepo
             await _context.SaveChangesAsync();
             return fuel;
         }
+        public async Task<FuelType> NameIsExistAsync(string name)
+        {
+            var fuel = await _context.FuelTypes
+                .FirstOrDefaultAsync(b => b.Name.ToLower() == name.ToLower());
 
+            return fuel;
+        }
     }
 
 }

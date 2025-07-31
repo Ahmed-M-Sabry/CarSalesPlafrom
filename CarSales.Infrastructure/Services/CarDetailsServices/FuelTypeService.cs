@@ -26,7 +26,7 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
 
         public async Task<IEnumerable<FuelType>> GetAllAsync()
         {
-            return await _fuelTypeRepository.GetAllActiveAsync();
+            return await _fuelTypeRepository.GetAllAsync();
         }
 
         public async Task<FuelType> GetByIdAsync(int id)
@@ -48,6 +48,16 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
         public async Task<FuelType> RestoreAsync(FuelType fuelType)
         {
             return await _fuelTypeRepository.RestoreAsync(fuelType);
+        }
+
+        public async Task<FuelType> NameIsExistAsync(string name, CancellationToken cancellation)
+        {
+            return await _fuelTypeRepository.NameIsExistAsync(name);
+        }
+
+        public async Task<IEnumerable<FuelType>> GetAllActiveAsync()
+        {
+            return await _fuelTypeRepository.GetAllActiveAsync();
         }
     }
 

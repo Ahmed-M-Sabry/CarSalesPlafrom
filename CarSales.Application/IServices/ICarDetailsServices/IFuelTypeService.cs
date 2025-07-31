@@ -11,10 +11,12 @@ namespace CarSales.Application.IServices.CarDetailsServices
     {
         Task<FuelType> GetByIdAsync(int id);
         Task<IEnumerable<FuelType>> GetAllAsync();
+        Task<IEnumerable<FuelType>> GetAllActiveAsync();
         Task<FuelType> CreateAsync(FuelType fuelType);
         Task UpdateAsync(FuelType fuelType);
         Task DeleteAsync(FuelType fuelType);
         Task<FuelType> RestoreAsync(FuelType fuelType);
+        Task<FuelType> NameIsExistAsync(string name,CancellationToken cancellation);
 
     }
 

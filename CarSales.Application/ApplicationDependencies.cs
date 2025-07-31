@@ -5,6 +5,8 @@ using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.
 using CarSales.Application.Features.AuthenticationFeatures.RegisterUser.Command.Validation;
 using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Commands.Validator;
+using CarSales.Application.Features.CarDetailsFeatures.FuelTypeFeatures.Commands.Models;
+using CarSales.Application.Features.CarDetailsFeatures.FuelTypeFeatures.Commands.Validator;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,8 +27,14 @@ namespace CarSales.Application
 
             services.AddScoped<IValidator<AddNewUserCommand>, AddNewUserValidator>();
             services.AddScoped<IValidator<UserLogInCommand>, UserLogInValidator>();
+
+            // Brand
             services.AddScoped<IValidator<CreateBrandCommand>, CreateBrandValidator>();
             services.AddScoped<IValidator<EditBrandCommand>, EditBrandValidator>();
+
+            // EditFuelType
+            services.AddScoped<IValidator<CreateFuelTypeCommand>, CreateFuelTypeValidator>();
+            services.AddScoped<IValidator<EditFuelTypeCommand>, EditFuelTypeValidator>();
 
             return services;
         }

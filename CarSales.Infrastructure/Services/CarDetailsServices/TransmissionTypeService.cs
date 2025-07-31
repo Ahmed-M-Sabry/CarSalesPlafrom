@@ -26,7 +26,7 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
 
         public async Task<IEnumerable<TransmissionType>> GetAllAsync()
         {
-            return await _transmissionTypeRepository.GetAllActiveAsync();
+            return await _transmissionTypeRepository.GetAllAsync();
         }
 
         public async Task<TransmissionType> GetByIdAsync(int id)
