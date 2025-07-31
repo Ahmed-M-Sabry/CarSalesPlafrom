@@ -1,8 +1,6 @@
 ﻿using CarSales.Domain.Entities.CarDetails;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CarSales.Application.IServices.ICarDetailsServices
@@ -11,12 +9,15 @@ namespace CarSales.Application.IServices.ICarDetailsServices
     {
         Task<IEnumerable<Model>> GetAllAsync();
         Task<IEnumerable<Model>> GetAllActiveAsync();
-        Task<Model?> GetByIdAsync(int id);
-        Task<Model?> GetByIdWithBrandAsync(int id);
+        Task<Model> GetByIdAsync(int id);
+        Task<IEnumerable<Model>> GetAllWithBrandAsync();
+        Task<IEnumerable<Model>> GetAllActiveWithBrandAsync();
+        Task<Model> GetByIdWithBrandAsync(int id);
+        Task<IEnumerable<Model>> GetByBrandIdWithBrandAsync(int brandId);
+        Task<Model> NameIsExistAsync(string name, int brandId, CancellationToken cancellationToken);
         Task<Model> CreateAsync(Model model);
         Task UpdateAsync(Model model);
         Task DeleteAsync(Model model);
         Task RestoreAsync(Model model);
     }
-
 }

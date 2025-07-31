@@ -1,10 +1,8 @@
 ﻿using CarSales.Application.IServices.ICarDetailsServices;
 using CarSales.Domain.Entities.CarDetails;
 using CarSales.Domain.IRepositories.ICarDetailsRepo;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CarSales.Infrastructure.Services.CarDetailsServices
@@ -28,14 +26,34 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
             return await _modelRepository.GetAllActiveAsync();
         }
 
-        public async Task<Model?> GetByIdAsync(int id)
+        public async Task<Model> GetByIdAsync(int id)
         {
             return await _modelRepository.GetByIdAsync(id);
         }
 
-        public async Task<Model?> GetByIdWithBrandAsync(int id)
+        public async Task<IEnumerable<Model>> GetAllWithBrandAsync()
+        {
+            return await _modelRepository.GetAllWithBrandAsync();
+        }
+
+        public async Task<IEnumerable<Model>> GetAllActiveWithBrandAsync()
+        {
+            return await _modelRepository.GetAllActiveWithBrandAsync();
+        }
+
+        public async Task<Model> GetByIdWithBrandAsync(int id)
         {
             return await _modelRepository.GetByIdIncludingBrandAsync(id);
+        }
+
+        public async Task<IEnumerable<Model>> GetByBrandIdWithBrandAsync(int brandId)
+        {
+            return await _modelRepository.GetByBrandIdWithBrandAsync(brandId);
+        }
+
+        public async Task<Model> NameIsExistAsync(string name, int brandId, CancellationToken cancellationToken)
+        {
+            return await _modelRepository.NameIsExistAsync(name, brandId, cancellationToken);
         }
 
         public async Task<Model> CreateAsync(Model model)
@@ -59,5 +77,4 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
             await _modelRepository.RestoreAsync(model);
         }
     }
-
 }

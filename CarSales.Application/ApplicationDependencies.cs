@@ -7,6 +7,8 @@ using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Commands.Mo
 using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Commands.Validator;
 using CarSales.Application.Features.CarDetailsFeatures.FuelTypeFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.FuelTypeFeatures.Commands.Validator;
+using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Models;
+using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Validator;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Validator;
 using FluentValidation;
@@ -41,6 +43,11 @@ namespace CarSales.Application
             // TransmissionType
             services.AddScoped<IValidator<CreateTransmissionTypeCommand>, CreateTransmissionTypeValidator>();
             services.AddScoped<IValidator<EditTransmissionTypeCommand>, EditTransmissionTypeValidator>();
+
+
+            // model
+            services.AddScoped<IValidator<CreateModelCommand>, CreateModelValidator>();
+            services.AddScoped<IValidator<EditModelCommand>, EditModelValidator>();
 
             return services;
         }
