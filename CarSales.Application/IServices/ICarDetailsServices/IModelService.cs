@@ -1,4 +1,5 @@
-﻿using CarSales.Domain.Entities.CarDetails;
+﻿using CarSales.Application.Comman;
+using CarSales.Domain.Entities.CarDetails;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,5 +20,7 @@ namespace CarSales.Application.IServices.ICarDetailsServices
         Task UpdateAsync(Model model);
         Task DeleteAsync(Model model);
         Task RestoreAsync(Model model);
+        Task<PagedResult<Model>> GetAllActivePaginationAsync(string nameFilter = null, int? page = null, int? pageSize = null);
+
     }
 }

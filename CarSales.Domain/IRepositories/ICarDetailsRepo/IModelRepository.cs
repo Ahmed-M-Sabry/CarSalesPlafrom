@@ -7,17 +7,18 @@ namespace CarSales.Domain.IRepositories.ICarDetailsRepo
 {
     public interface IModelRepository
     {
-        Task<IEnumerable<Model>> GetAllAsync();
-        Task<IEnumerable<Model>> GetAllActiveAsync();
+        IQueryable<Model> GetAllAsync();
+        IQueryable<Model> GetAllActiveAsync();
+        IQueryable<Model> GetAllWithBrandAsync();
+        IQueryable<Model> GetByBrandIdWithBrandAsync(int brandId);
+        IQueryable<Model> GetAllActiveWithBrandAsync();
         Task<Model> GetByIdAsync(int id);
-        Task<IEnumerable<Model>> GetAllWithBrandAsync();
-        Task<IEnumerable<Model>> GetAllActiveWithBrandAsync();
         Task<Model> GetByIdIncludingBrandAsync(int id);
-        Task<IEnumerable<Model>> GetByBrandIdWithBrandAsync(int brandId);
         Task AddAsync(Model model);
         Task UpdateAsync(Model model);
         Task SoftDeleteAsync(Model model);
         Task RestoreAsync(Model model);
         Task<Model> NameIsExistAsync(string name, int brandId, CancellationToken cancellationToken);
+
     }
 }

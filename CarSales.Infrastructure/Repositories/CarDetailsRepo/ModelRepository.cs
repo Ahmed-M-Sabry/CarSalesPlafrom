@@ -17,16 +17,16 @@ namespace CarSales.Infrastructure.Repositories.CarDetailsRepo
             _context = context;
         }
 
-        public async Task<IEnumerable<Model>> GetAllAsync()
+        public IQueryable<Model> GetAllAsync()
         {
-            return await _context.Models.ToListAsync();
+            return _context.Models.AsQueryable();
         }
 
-        public async Task<IEnumerable<Model>> GetAllActiveAsync()
+        public IQueryable<Model> GetAllActiveAsync()
         {
-            return await _context.Models
+            return _context.Models
                 .Where(m => !m.IsDeleted)
-                .ToListAsync();
+                .AsQueryable();
         }
 
         public async Task<Model> GetByIdAsync(int id)
@@ -34,19 +34,19 @@ namespace CarSales.Infrastructure.Repositories.CarDetailsRepo
             return await _context.Models.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Model>> GetAllWithBrandAsync()
+        public IQueryable<Model> GetAllWithBrandAsync()
         {
-            return await _context.Models
+            return _context.Models
                 .Include(m => m.Brand)
-                .ToListAsync();
+                .AsQueryable();
         }
 
-        public async Task<IEnumerable<Model>> GetAllActiveWithBrandAsync()
+        public IQueryable<Model> GetAllActiveWithBrandAsync()
         {
-            return await _context.Models
+            return _context.Models
                 .Include(m => m.Brand)
                 .Where(m => !m.IsDeleted)
-                .ToListAsync();
+                .AsQueryable();
         }
 
         public async Task<Model> GetByIdIncludingBrandAsync(int id)
@@ -56,12 +56,12 @@ namespace CarSales.Infrastructure.Repositories.CarDetailsRepo
                 .FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        public async Task<IEnumerable<Model>> GetByBrandIdWithBrandAsync(int brandId)
+        public IQueryable<Model> GetByBrandIdWithBrandAsync(int brandId)
         {
-            return await _context.Models
+            return _context.Models
                 .Include(m => m.Brand)
                 .Where(m => m.BrandId == brandId && !m.IsDeleted)
-                .ToListAsync();
+                .AsQueryable();
         }
 
         public async Task AddAsync(Model model)

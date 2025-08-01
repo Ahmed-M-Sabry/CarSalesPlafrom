@@ -1,6 +1,7 @@
 ﻿using CarSales.API.ApplicationBase;
 using CarSales.Application.Comman;
 using CarSales.Application.Common;
+using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Queries.Models;
 using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Queries.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +12,7 @@ namespace CarSales.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = ApplicationRoles.Admin)]
+    //[Authorize(Roles = ApplicationRoles.Admin)]
     public class ModelController : ApplicationControllerBase
     {
         [HttpPost("Create-Model")]
@@ -67,6 +68,12 @@ namespace CarSales.API.Controllers
         public async Task<IActionResult> GetModelsByBrandId([FromQuery] int brandId)
         {
             var result = await Mediator.Send(new GetModelsByBrandIdQuery(brandId));
+            return result.ResultStatusCode();
+        }
+        [HttpGet("Get-Pagination-Active-Models")]
+        public async Task<IActionResult> GetAllActivePaginationAsync([FromQuery] GetPagedActiveModelQuery query)
+        {
+            var result = await Mediator.Send(query);
             return result.ResultStatusCode();
         }
     }

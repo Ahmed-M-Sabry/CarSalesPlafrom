@@ -71,11 +71,18 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
             }
 
             var totalCount = await query.CountAsync();
-
-            if (page.HasValue && pageSize.HasValue)
+            if (!page.HasValue || page <= 0 || !pageSize.HasValue || pageSize <= 0)
             {
-                query = query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
+                return new PagedResult<Brand>
+                {
+                    Data = new List<Brand>(),
+                    TotalCount = totalCount,
+                    PageNumber = 1,
+                    PageSize = 0
+                };
             }
+
+            query = query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
 
             var items = await query.ToListAsync();
 
