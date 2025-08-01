@@ -1,4 +1,5 @@
-﻿using CarSales.Domain.Entities.CarDetails;
+﻿using CarSales.Application.Comman;
+using CarSales.Domain.Entities.CarDetails;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace CarSales.Application.IServices.CarDetailsServices
         Task DeleteAsync(Brand brand); 
         Task<Brand> RestoreAsync(Brand brand);
         Task<Brand> NameIsExistAsync(string name, CancellationToken cancellationToken);
+        Task<PagedResult<Brand>> GetAllActivePaginationAsync(string nameFilter = null, int? page = null, int? pageSize = null);
 
     }
 }

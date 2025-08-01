@@ -25,11 +25,10 @@ namespace CarSales.Infrastructure.Repositories.CarDetailsRepo
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Brand>> GetAllActiveAsync()
+        public IQueryable<Brand> GetAllActiveAsync()
         {
-            return await _context.Brands
-                .Where(b => !b.IsDeleted)
-                .ToListAsync();
+            return _context.Brands
+                .Where(b => !b.IsDeleted);
         }
         public async Task<Brand> RestoreAsync(Brand brand)
         {

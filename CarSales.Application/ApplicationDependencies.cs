@@ -29,7 +29,8 @@ namespace CarSales.Application
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
-                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
+                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AdminAuthorizationBehavior<,>));
+                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(UserAuthorizationBehavior<,>));
             });
 
             services.AddAutoMapper(cfg =>

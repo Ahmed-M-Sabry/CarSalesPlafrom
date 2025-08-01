@@ -1,9 +1,13 @@
 ﻿using CarSales.Application.Comman;
 using CarSales.Application.Common;
 using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Commands.Models;
+using CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Queries.Models;
 using CarSales.Application.Features.CarDetailsFeatures.FuelTypeFeatures.Commands.Models;
+using CarSales.Application.Features.CarDetailsFeatures.FuelTypeFeatures.Queries.Models;
 using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Models;
+using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Queries.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Models;
+using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Queries.Models;
 using CarSales.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -13,14 +17,14 @@ using System.Threading.Tasks;
 
 namespace CarSales.Application.PipelineBehaviors
 {
-    public class AuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class AdminAuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
         where TResponse : class
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public AuthorizationBehavior(IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
+        public AdminAuthorizationBehavior(IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
         {
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
@@ -31,23 +35,36 @@ namespace CarSales.Application.PipelineBehaviors
             // List of commands that require Admin role
             var adminRequiredCommands = new[]
             {
+                // Create
                 typeof(CreateBrandCommand),
                 typeof(CreateModelCommand),
                 typeof(CreateFuelTypeCommand),
                 typeof(CreateTransmissionTypeCommand),
+
+                // Edit
                 typeof(EditBrandCommand),
                 typeof(EditModelCommand),
                 typeof(EditFuelTypeCommand),
                 typeof(EditTransmissionTypeCommand),
+
+                // Delete
                 typeof(DeleteBrandCommand),
                 typeof(DeleteModelCommand),
                 typeof(DeleteFuelTypeCommand),
                 typeof(DeleteTransmissionTypeCommand),
+
+                // Restore
                 typeof(RestoreBrandCommand),
                 typeof(RestoreModelCommand),
                 typeof(RestoreFuelTypeCommand),
-                typeof(RestoreTransmissionTypeCommand)
-                // Add other commands as needed
+                typeof(RestoreTransmissionTypeCommand),
+                
+                // Get All
+                typeof(GetAllBrandsQuery),
+                typeof(GetAllModelsQuery),
+                typeof(GetAllFuelTypesQuery),
+                typeof(GetAllTransmissionTypesQuery),
+
             };
 
             // Check if the request is one of the admin-required commands

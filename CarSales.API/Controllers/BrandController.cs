@@ -10,7 +10,7 @@ namespace CarSales.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = ApplicationRoles.Admin)]
+    //[Authorize(Roles = ApplicationRoles.Admin)]
     public class BrandController : ApplicationControllerBase
     {
         [HttpPost("Create-Brand")]
@@ -58,7 +58,12 @@ namespace CarSales.API.Controllers
             var result = await Mediator.Send(new GetActiveBrandsQuery());
             return result.ResultStatusCode();
         }
-
+        [HttpGet("Get-Pagination-Active-Brands")]
+        public async Task<IActionResult> GetAllActivePaginationAsync([FromQuery] GetPagedActiveBrandsQuery query)
+        {
+            var result = await Mediator.Send(query);
+            return result.ResultStatusCode();
+        }
 
     }
 }

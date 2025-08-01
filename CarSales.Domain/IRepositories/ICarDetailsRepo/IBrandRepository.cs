@@ -10,7 +10,7 @@ namespace CarSales.Domain.IRepositories.CarDetailsRepo
     public interface IBrandRepository : IGenericRepositoryAsync<Brand>
     {
         Task SoftDeleteAsync(Brand brand);
-        Task<IEnumerable<Brand>> GetAllActiveAsync();
+        IQueryable<Brand> GetAllActiveAsync();
         Task<Brand> RestoreAsync(Brand brand);
         Task<Brand> NameIsExistAsync(string name);
 

@@ -1,4 +1,5 @@
-﻿using CarSales.Application.IServices.CarDetailsServices;
+﻿using CarSales.Application.Comman;
+using CarSales.Application.IServices.CarDetailsServices;
 using CarSales.Domain.Entities.CarDetails;
 using CarSales.Domain.IRepositories.CarDetailsRepo;
 using Microsoft.EntityFrameworkCore;
@@ -48,14 +49,45 @@ namespace CarSales.Infrastructure.Services.CarDetailsServices
             return await _brandRepository.RestoreAsync(brand);
         }
 
-        public async Task<IEnumerable<Brand>> GetAllActiveAsync()
-        {
-            return await _brandRepository.GetAllActiveAsync();
-        }
 
         public async Task<Brand> NameIsExistAsync(string name, CancellationToken cancellationToken)
         {
             return await _brandRepository.NameIsExistAsync(name);
         }
+
+
+        public async Task<IEnumerable<Brand>> GetAllActiveAsync()
+        {
+            return await _brandRepository.GetAllActiveAsync().ToListAsync();
+        }
+
+        public async Task<PagedResult<Brand>> GetAllActivePaginationAsync(string nameFilter = null, int? page = null, int? pageSize = null)
+        {
+            var query = _brandRepository.GetAllActiveAsync();
+
+            if (!string.IsNullOrEmpty(nameFilter))
+            {
+                query = query.Where(b => b.Name.ToLower().Contains(nameFilter.ToLower()));
+            }
+
+            var totalCount = await query.CountAsync();
+
+            if (page.HasValue && pageSize.HasValue)
+            {
+                query = query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
+            }
+
+            var items = await query.ToListAsync();
+
+            return new PagedResult<Brand>
+            {
+                Data = items,
+                TotalCount = totalCount,
+                PageNumber = page ?? 1,
+                PageSize = pageSize ?? totalCount,
+            };
+        }
+
+
     }
 }
