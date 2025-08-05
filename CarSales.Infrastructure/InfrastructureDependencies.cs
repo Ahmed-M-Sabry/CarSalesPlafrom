@@ -5,6 +5,7 @@ using CarSales.Domain.IRepositories;
 using CarSales.Domain.IRepositories.CarDetailsRepo;
 using CarSales.Domain.IRepositories.ICarDetailsRepo;
 using CarSales.Infrastructure.Data;
+using CarSales.Infrastructure.Repositories;
 using CarSales.Infrastructure.Repositories.CarDetailsRepo;
 using CarSales.Infrastructure.Services;
 using CarSales.Infrastructure.Services.CarDetailsServices;
@@ -28,7 +29,9 @@ namespace CarSales.Infrastructure
             services.AddTransient<ITransmissionTypeService, TransmissionTypeService>();
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<IFuelTypeService, FuelTypeService>();
-
+            services.AddTransient<IOldCarPostService, OldCarPostService>();
+            services.AddTransient<IFileService, FileService>();
+            services.AddTransient<IUserContextService, UserContextService>();
 
 
             // Repositories
@@ -36,7 +39,7 @@ namespace CarSales.Infrastructure
             services.AddTransient<ITransmissionTypeRepository, TransmissionTypeRepository>();
             services.AddTransient<IFuelTypeRepository, FuelTypeRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
-
+            services.AddTransient<IOldCarPostRepository, OldCarPostRepository>();
 
             return services;
         }

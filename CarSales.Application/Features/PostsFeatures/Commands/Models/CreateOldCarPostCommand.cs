@@ -1,35 +1,25 @@
-﻿using CarSales.Domain.Entities.CarDetails;
+﻿using CarSales.Application.Common;
+using CarSales.Application.Features.PostsFeatures.Commands.Dots;
+using CarSales.Domain.Entities.Posts;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace CarSales.Domain.Entities.Posts
+namespace CarSales.Application.Features.PostsFeatures.Commands.Models
 {
-    public class OldCarPost
+    public class CreateOldCarPostCommand : IRequest<Result<OldCarPost>>
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
 
         public int BrandId { get; set; }
-        [JsonIgnore]
-        public Brand Brand { get; set; }
-
         public int ModelId { get; set; }
-        [JsonIgnore]
-        public Model Model { get; set; }
-
         public int FuelTypeId { get; set; }
-        [JsonIgnore]
-        public FuelType FuelType { get; set; }
-
         public int TransmissionTypeId { get; set; }
-        [JsonIgnore]
-        public TransmissionType TransmissionType { get; set; }
-
 
         public int Year { get; set; }
         public int MileageKm { get; set; }
@@ -43,12 +33,7 @@ namespace CarSales.Domain.Entities.Posts
         public bool IsWhatsAppAvailable { get; set; }
         public string? Address { get; set; }
 
-        public string SellerId { get; set; }
-        [JsonIgnore]
-        public ApplicationUser Seller { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
-        public ICollection<UsedCarImage> Images { get; set; }
+        public IFormFileCollection? Images { get; set; } 
     }
+
 }

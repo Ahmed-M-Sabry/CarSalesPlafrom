@@ -31,6 +31,7 @@ namespace CarSales.Infrastructure
                     option.Password.RequireLowercase = false;
                     option.Password.RequireUppercase = false;
                     option.Password.RequireNonAlphanumeric = false;
+                    option.SignIn.RequireConfirmedAccount = false; // Disable email confirmation for simplicity
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

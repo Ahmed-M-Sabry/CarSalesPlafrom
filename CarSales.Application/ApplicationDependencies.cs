@@ -11,6 +11,8 @@ using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Mo
 using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Validator;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Validator;
+using CarSales.Application.Features.PostsFeatures.Commands.Models;
+using CarSales.Application.Features.PostsFeatures.Validator;
 using CarSales.Application.PipelineBehaviors;
 using FluentValidation;
 using MediatR;
@@ -31,6 +33,7 @@ namespace CarSales.Application
                 cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AdminAuthorizationBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(UserAuthorizationBehavior<,>));
+                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(PublicAuthorizationBehavior<,>));
             });
 
             services.AddAutoMapper(cfg =>
@@ -57,6 +60,9 @@ namespace CarSales.Application
             // model
             services.AddScoped<IValidator<CreateModelCommand>, CreateModelValidator>();
             services.AddScoped<IValidator<EditModelCommand>, EditModelValidator>();
+
+            services.AddScoped<IValidator<CreateOldCarPostCommand>, CreateOldCarPostValidator>();
+
 
             return services;
         }

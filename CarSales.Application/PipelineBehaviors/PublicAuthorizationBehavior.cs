@@ -13,19 +13,22 @@ using CarSales.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using System.Threading;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CarSales.Application.PipelineBehaviors
 {
-    public class UserAuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class PublicAuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
         where TResponse : class
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserAuthorizationBehavior(IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
+        public PublicAuthorizationBehavior(IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
         {
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
@@ -34,27 +37,16 @@ namespace CarSales.Application.PipelineBehaviors
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             // List of commands that require Admin role
-            var userRequiredCommands = new[]
+            var adminRequiredCommands = new[]
             {
                 // Create
-                typeof(CreateBrandCommand)
+                typeof(CreateOldCarPostCommand),
 
-                // Edit
-                
-
-                // Delete
-                
-
-                // Restore
-                
-                
-                // Get All
-                
 
             };
 
             // Check if the request is one of the admin-required commands
-            if (userRequiredCommands.Contains(request.GetType()))
+            if (adminRequiredCommands.Contains(request.GetType()))
             {
                 // If there's an HTTP context (i.e., request comes from Controller)
                 if (_httpContextAccessor.HttpContext != null)
@@ -67,8 +59,8 @@ namespace CarSales.Application.PipelineBehaviors
                     if (user == null)
                         return Result<TResponse>.Failure("User not found.", ErrorType.Unauthorized) as TResponse;
 
-                    if (!await _userManager.IsInRoleAsync(user, ApplicationRoles.User))
-                        return Result<TResponse>.Failure("You must be an user to perform this action.", ErrorType.Unauthorized) as TResponse;
+                    if (!await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin) && !await _userManager.IsInRoleAsync(user, ApplicationRoles.User))
+                        return Result<TResponse>.Failure("You must be an Login to perform this action.", ErrorType.Unauthorized) as TResponse;
                 }
                 else
                 {
