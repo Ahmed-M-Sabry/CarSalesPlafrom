@@ -20,31 +20,14 @@ namespace CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Command
     public class CreateBrandHandler : IRequestHandler<CreateBrandCommand, Result<Brand>>
     {
         private readonly IBrandService _brandService;
-        private readonly IValidator<CreateBrandCommand> _validator;
-        private readonly IIdentityServies _identityServices;
 
-        public CreateBrandHandler(IBrandService brandService
-            , IValidator<CreateBrandCommand> validator
-            , IIdentityServies identityServices)
+
+        public CreateBrandHandler(IBrandService brandService)
         {
             _brandService = brandService;
-            _validator = validator;
-            _identityServices = identityServices;
         }
         public async Task<Result<Brand>> Handle(CreateBrandCommand request, CancellationToken cancellationToken)
         {
-            // Check if the current user is Admin
-            //if (!await _identityServices.IsUserAdmin(cancellationToken))
-            //{
-            //    return Result<Brand>.Failure("You must be an Admin to create a brand.", ErrorType.Unauthorized);
-            //}
-
-            var Validator = await _validator.ValidateAsync(request, cancellationToken);
-            if (!Validator.IsValid)
-            {
-                var errors = Validator.Errors.Select(e => e.ErrorMessage).ToList();
-                return Result<Brand>.Failure(string.Join(" | ", errors), ErrorType.BadRequest);
-            }
 
             // Name is Exist or not
             var nameIsExist = await _brandService.NameIsExistAsync(request.Name, cancellationToken);

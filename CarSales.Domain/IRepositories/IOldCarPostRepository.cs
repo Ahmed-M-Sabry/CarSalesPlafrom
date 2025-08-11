@@ -10,6 +10,6 @@ namespace CarSales.Domain.IRepositories
 {
     public interface IOldCarPostRepository : IGenericRepositoryAsync<OldCarPost>
     {
-
+        Task<OldCarPost> GetByIdAsync(string userId, int id);
     }
 }

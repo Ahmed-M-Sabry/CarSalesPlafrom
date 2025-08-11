@@ -12,7 +12,8 @@ using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Va
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Validator;
 using CarSales.Application.Features.PostsFeatures.Commands.Models;
-using CarSales.Application.Features.PostsFeatures.Validator;
+using CarSales.Application.Features.PostsFeatures.Commands.SpecificServices;
+using CarSales.Application.Features.PostsFeatures.Commands.Validator;
 using CarSales.Application.PipelineBehaviors;
 using FluentValidation;
 using MediatR;
@@ -34,6 +35,7 @@ namespace CarSales.Application
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AdminAuthorizationBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(UserAuthorizationBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(PublicAuthorizationBehavior<,>));
+                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
 
             services.AddAutoMapper(cfg =>
@@ -62,7 +64,12 @@ namespace CarSales.Application
             services.AddScoped<IValidator<EditModelCommand>, EditModelValidator>();
 
             services.AddScoped<IValidator<CreateOldCarPostCommand>, CreateOldCarPostValidator>();
+            services.AddScoped<IValidator<EditOldCarPostCommands>, EditOldCarPostValidator>();
 
+
+            // Specific Srevice
+            services.AddTransient<ICarPostEditServices, CarPostEditServices>();
+            services.AddTransient<ICarPostCreateServices, CarPostCreateServices>();
 
             return services;
         }

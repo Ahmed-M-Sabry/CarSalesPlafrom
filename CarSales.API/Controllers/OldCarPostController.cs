@@ -21,6 +21,14 @@ namespace CarSales.API.Controllers
             var result = await Mediator.Send(command);
             return result.ResultStatusCode();
         }
+        [HttpPut]
+        [Route("Edit-Old-Cars-Post")]
+        public async Task<IActionResult> EditOldCarPost([FromForm] EditOldCarPostCommands command)
+        {
+            var result = await Mediator.Send(command);
+            return result.ResultStatusCode();
+        }
+
 
     }
 }

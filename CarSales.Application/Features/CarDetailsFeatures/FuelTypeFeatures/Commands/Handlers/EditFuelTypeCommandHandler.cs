@@ -17,26 +17,16 @@ namespace CarSales.Application.Features.CarDetailsFeatures.FuelTypeFeatures.Comm
     public class EditFuelTypeCommandHandler : IRequestHandler<EditFuelTypeCommand, Result<FuelType>>
     {
         private readonly IFuelTypeService _fuelTypeService;
-        private readonly IValidator<EditFuelTypeCommand> _validator;
 
-        public EditFuelTypeCommandHandler(IFuelTypeService fuelTypeService ,
-            IValidator<EditFuelTypeCommand> validator)
+        public EditFuelTypeCommandHandler(IFuelTypeService fuelTypeService)
         {
             _fuelTypeService = fuelTypeService;
-            _validator = validator;
 
         }
         public async Task<Result<FuelType>> Handle(EditFuelTypeCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var validationResult = await _validator.ValidateAsync(request, cancellationToken);
-                if (!validationResult.IsValid)
-                {
-                    var errors = validationResult.Errors.Select(x => x.ErrorMessage).ToList();
-                    return Result<FuelType>.Failure(string.Join(" | ", errors), ErrorType.BadRequest);
-                }
-
                 var fuelType = await _fuelTypeService.GetByIdAsync(request.Id);
                 if (fuelType == null)
                 {

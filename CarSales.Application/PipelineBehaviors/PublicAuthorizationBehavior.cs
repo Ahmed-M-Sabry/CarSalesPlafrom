@@ -41,6 +41,7 @@ namespace CarSales.Application.PipelineBehaviors
             {
                 // Create
                 typeof(CreateOldCarPostCommand),
+                typeof(EditOldCarPostCommands),
 
 
             };

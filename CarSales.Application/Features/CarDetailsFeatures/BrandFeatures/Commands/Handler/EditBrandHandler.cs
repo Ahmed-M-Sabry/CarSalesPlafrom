@@ -17,26 +17,17 @@ namespace CarSales.Application.Features.CarDetailsFeatures.BrandFeatures.Command
     public class EditBrandHandler : IRequestHandler<EditBrandCommand,Result<Brand>>
     {
         private readonly IBrandService _brandService;
-        private readonly IValidator<EditBrandCommand> _validator;
         private readonly IMapper _mapper;
 
         public EditBrandHandler(IBrandService brandService
-            , IValidator<EditBrandCommand> validator
             , IMapper mapper)
         {
             _brandService = brandService;
-            _validator = validator;
             _mapper = mapper;
         }
 
         public async Task<Result<Brand>> Handle(EditBrandCommand request, CancellationToken cancellationToken)
         {
-            var validator = await _validator.ValidateAsync(request, cancellationToken);
-            if(!validator.IsValid)
-            {
-                var errors = validator.Errors.Select(e => e.ErrorMessage).ToList();
-                return Result<Brand>.Failure(string.Join(" | ", errors), ErrorType.BadRequest); 
-            }
 
             // IsExist Brand
             var isExits = await _brandService.GetByIdAsync(request.Id);

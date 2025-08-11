@@ -15,23 +15,14 @@ namespace CarSales.Application.Features.CarDetailsFeatures.FuelTypeFeatures.Comm
     public class CreateFuelTypeHandler : IRequestHandler<CreateFuelTypeCommand, Result<FuelType>>
     {
         private readonly IFuelTypeService _fuelTypeService;
-        private readonly IValidator<CreateFuelTypeCommand> _validator;
 
-        public CreateFuelTypeHandler(IFuelTypeService fuelTypeService, IValidator<CreateFuelTypeCommand> validator)
+        public CreateFuelTypeHandler(IFuelTypeService fuelTypeService)
         {
             _fuelTypeService = fuelTypeService;
-            _validator = validator;
         }
 
         public async Task<Result<FuelType>> Handle(CreateFuelTypeCommand request, CancellationToken cancellationToken)
         {
-            var validationResult = await _validator.ValidateAsync(request, cancellationToken);
-            if (!validationResult.IsValid)
-            {
-                var errors = validationResult.Errors.Select(x => x.ErrorMessage).ToList();
-                return Result<FuelType>.Failure(string.Join(" | ", errors), ErrorType.BadRequest);
-            }
-
             var isExist = await _fuelTypeService.NameIsExistAsync(request.Name, cancellationToken);
             if (isExist != null)
             {

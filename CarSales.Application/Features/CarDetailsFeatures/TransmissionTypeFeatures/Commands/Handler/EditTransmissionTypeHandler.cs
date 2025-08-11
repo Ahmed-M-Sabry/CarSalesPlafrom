@@ -14,24 +14,14 @@ namespace CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatu
     public class EditTransmissionTypeHandler : IRequestHandler<EditTransmissionTypeCommand, Result<TransmissionType>>
     {
         private readonly ITransmissionTypeService _transmissionTypeService;
-        private readonly IValidator<EditTransmissionTypeCommand> _validator;
-        private readonly IMapper _mapper;
 
-        public EditTransmissionTypeHandler(ITransmissionTypeService transmissionTypeService, IValidator<EditTransmissionTypeCommand> validator, IMapper mapper)
+        public EditTransmissionTypeHandler(ITransmissionTypeService transmissionTypeService)
         {
             _transmissionTypeService = transmissionTypeService;
-            _validator = validator;
-            _mapper = mapper;
         }
 
         public async Task<Result<TransmissionType>> Handle(EditTransmissionTypeCommand request, CancellationToken cancellationToken)
         {
-            var validationResult = await _validator.ValidateAsync(request, cancellationToken);
-            if (!validationResult.IsValid)
-            {
-                var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
-                return Result<TransmissionType>.Failure(string.Join(" | ", errors), ErrorType.BadRequest);
-            }
 
             // Check if the transmission type exists
             var transmissionType = await _transmissionTypeService.GetByIdAsync(request.Id);

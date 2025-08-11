@@ -6,11 +6,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CarSales.Infrastructure.Services
 {
     public class FileService : IFileService
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public FileService(IWebHostEnvironment webHostEnvironment)
+        {
+            _webHostEnvironment = webHostEnvironment;
+        }
         public async Task<Result<string>> UploadFileAsync(IFormFile file, string targetFolder, string expectedType)
         {
             // التأكد إن الملف موجود ومش فاضي
@@ -30,7 +36,7 @@ namespace CarSales.Infrastructure.Services
             ValidateFileSize(file , 10 * 1024 * 1024); // 5 MB
 
             // تحديد مكان حفظ الملف داخل مجلد wwwroot/uploads/targetFolder
-            string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", targetFolder);
+            string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), _webHostEnvironment.WebRootPath, "uploads", targetFolder);
 
             // إنشاء المجلد لو مش موجود
             if (!Directory.Exists(uploadsFolder))

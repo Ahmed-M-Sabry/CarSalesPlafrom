@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Application.Features.PostsFeatures.Validator
+namespace CarSales.Application.Features.PostsFeatures.Commands.Validator
 {
-    internal class CreateOldCarPostValidator : AbstractValidator<CreateOldCarPostCommand>
+    internal class EditOldCarPostValidator : AbstractValidator<EditOldCarPostCommands>
     {
-        public CreateOldCarPostValidator()
+        public EditOldCarPostValidator()
         {
             RuleFor(p => p.Title)
                 .NotEmpty().WithMessage("Title is required.")
@@ -42,9 +42,6 @@ namespace CarSales.Application.Features.PostsFeatures.Validator
                 .NotEmpty().WithMessage("Phone number is required.")
                 .Matches(@"^\+?\d{10,15}$").WithMessage("Invalid phone number format.");
 
-            RuleFor(p => p.Images)
-                .Must(images => images == null || images.All(img => img.Length <= 5 * 1024 * 1024))
-                .WithMessage("Each File must be less than 5MB.");
         }
     }
 }

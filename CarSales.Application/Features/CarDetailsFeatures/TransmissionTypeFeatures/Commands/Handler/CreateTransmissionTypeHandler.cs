@@ -13,22 +13,14 @@ namespace CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatu
     public class CreateTransmissionTypeHandler : IRequestHandler<CreateTransmissionTypeCommand, Result<TransmissionType>>
     {
         private readonly ITransmissionTypeService _transmissionTypeService;
-        private readonly IValidator<CreateTransmissionTypeCommand> _validator;
 
-        public CreateTransmissionTypeHandler(ITransmissionTypeService transmissionTypeService, IValidator<CreateTransmissionTypeCommand> validator)
+        public CreateTransmissionTypeHandler(ITransmissionTypeService transmissionTypeService)
         {
             _transmissionTypeService = transmissionTypeService;
-            _validator = validator;
         }
 
         public async Task<Result<TransmissionType>> Handle(CreateTransmissionTypeCommand request, CancellationToken cancellationToken)
         {
-            var validationResult = await _validator.ValidateAsync(request, cancellationToken);
-            if (!validationResult.IsValid)
-            {
-                var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
-                return Result<TransmissionType>.Failure(string.Join(" | ", errors), ErrorType.BadRequest);
-            }
 
             // Check if name exists
             var nameIsExist = await _transmissionTypeService.NameIsExistAsync(request.Name, cancellationToken);

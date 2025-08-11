@@ -10,7 +10,7 @@ namespace CarSales.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = ApplicationRoles.Admin)]
+    [Authorize(Roles = ApplicationRoles.Admin)]
     public class BrandController : ApplicationControllerBase
     {
         [HttpPost("Create-Brand")]

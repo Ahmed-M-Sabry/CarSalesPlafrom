@@ -2,6 +2,7 @@
 using CarSales.Application.IServices;
 using CarSales.Domain.Entities.Posts;
 using CarSales.Domain.IRepositories;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,5 +28,19 @@ namespace CarSales.Infrastructure.Services
             return Result<OldCarPost>.Success(post);
         }
 
+        public async Task<Result<OldCarPost>> GetByIdAsync(string userId , int id, CancellationToken cancellationToken = default)
+        {
+            var post =  await _oldCarPostRepository.GetByIdAsync(userId , id);
+            if (post == null)
+            {
+                return Result<OldCarPost>.Failure("Post not found.", ErrorType.BadRequest);
+            }
+            return Result<OldCarPost>.Success(post);
+        }
+
+        public async Task UpdateAsync(OldCarPost oldCarPost, CancellationToken cancellationToken = default)
+        {
+            await _oldCarPostRepository.UpdateAsync(oldCarPost);
+        }
     }
 }
