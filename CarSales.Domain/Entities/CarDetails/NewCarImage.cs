@@ -14,6 +14,8 @@ namespace CarSales.Domain.Entities.CarDetails
 
         public string Url { get; set; }
 
+        public string? Hash { get; set; } // Added for duplicate checking
+
         public DateTime CreatedAt { get; set; }
 
         public int NewCarPostId { get; set; }

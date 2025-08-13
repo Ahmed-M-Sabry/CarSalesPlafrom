@@ -32,6 +32,9 @@ namespace CarSales.Infrastructure
             services.AddTransient<IOldCarPostService, OldCarPostService>();
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IUserContextService, UserContextService>();
+            services.AddTransient<IUsedCarImageServices, UsedCarImageServices>();
+            services.AddTransient<INewCarImageServices, NewCarImageServices>();
+            services.AddTransient<INewCarPostServices, NewCarPostServices>();
 
 
             // Repositories
@@ -40,6 +43,9 @@ namespace CarSales.Infrastructure
             services.AddTransient<IFuelTypeRepository, FuelTypeRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IOldCarPostRepository, OldCarPostRepository>();
+            services.AddTransient<INewCarImageRepository, NewCarImageRepository>();
+            services.AddTransient<INewCarImageRepository, NewCarImageRepository>();
+            services.AddTransient<IUsedCarImageRepository, UsedCarImageRepository>();
 
             return services;
         }

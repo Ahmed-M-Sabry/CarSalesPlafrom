@@ -11,9 +11,14 @@ using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Mo
 using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Validator;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Validator;
+using CarSales.Application.Features.GetUsedCarImagesFeatures.Commands.Models;
+using CarSales.Application.Features.GetUsedCarImagesFeatures.Commands.Validator;
+using CarSales.Application.Features.GetUsedCarImagesFeatures.Queries.Models;
+using CarSales.Application.Features.GetUsedCarImagesFeatures.Queries.Validator;
 using CarSales.Application.Features.PostsFeatures.Commands.Models;
 using CarSales.Application.Features.PostsFeatures.Commands.SpecificServices;
 using CarSales.Application.Features.PostsFeatures.Commands.Validator;
+using CarSales.Application.Features.UsedCarImages.Validator;
 using CarSales.Application.PipelineBehaviors;
 using FluentValidation;
 using MediatR;
@@ -65,6 +70,11 @@ namespace CarSales.Application
 
             services.AddScoped<IValidator<CreateOldCarPostCommand>, CreateOldCarPostValidator>();
             services.AddScoped<IValidator<EditOldCarPostCommands>, EditOldCarPostValidator>();
+
+            services.AddScoped<IValidator<GetUsedCarImagesByPostIdQuery>, GetUsedCarImagesByPostIdQueryValidator>();
+            services.AddScoped<IValidator<GetImageByIdQurey>, GetImageByIdQueryValidator>();
+            services.AddScoped<IValidator<DeleteImageFromOldCarPostCommand>, DeleteImageFromOldCarPostCommandValidator>();
+            services.AddScoped<IValidator<AddImagesToOldCarPostCommand>, AddImagesToOldCarPostCommandValidator>();
 
 
             // Specific Srevice

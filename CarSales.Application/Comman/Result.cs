@@ -41,6 +41,7 @@ namespace CarSales.Application.Common
         Conflict,
         UnprocessableEntity,
         InternalServerError,
-        Unauthorized
+        Unauthorized,
+        Forbidden
     }
 }

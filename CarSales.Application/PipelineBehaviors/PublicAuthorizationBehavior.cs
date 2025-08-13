@@ -8,6 +8,7 @@ using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Mo
 using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Queries.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Queries.Models;
+using CarSales.Application.Features.GetUsedCarImagesFeatures.Queries.Models;
 using CarSales.Application.Features.PostsFeatures.Commands.Models;
 using CarSales.Domain.Entities;
 using MediatR;
@@ -37,17 +38,18 @@ namespace CarSales.Application.PipelineBehaviors
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             // List of commands that require Admin role
-            var adminRequiredCommands = new[]
+            var publicAuthRequiredCommands = new[]
             {
                 // Create
                 typeof(CreateOldCarPostCommand),
                 typeof(EditOldCarPostCommands),
+                typeof(GetUsedCarImagesByPostIdQuery),
 
 
             };
 
             // Check if the request is one of the admin-required commands
-            if (adminRequiredCommands.Contains(request.GetType()))
+            if (publicAuthRequiredCommands.Contains(request.GetType()))
             {
                 // If there's an HTTP context (i.e., request comes from Controller)
                 if (_httpContextAccessor.HttpContext != null)

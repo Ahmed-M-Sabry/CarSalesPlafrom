@@ -12,5 +12,6 @@ namespace CarSales.Application.IServices
     {
         //Task<string> UploadFileAsync(IFormFile file, string targetFolder, string expectedType);
         Task<Result<string>> UploadFileAsync(IFormFile file, string targetFolder, string expectedType);
+        Task<string> CalculateFileHashAsync(IFormFile file);
     }
 }
