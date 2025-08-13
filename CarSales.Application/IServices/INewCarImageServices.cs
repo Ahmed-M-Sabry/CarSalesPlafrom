@@ -1,17 +1,19 @@
 ﻿using CarSales.Domain.Entities.CarDetails;
-using CarSales.Domain.Entities.Posts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Domain.IRepositories
+namespace CarSales.Application.IServices
 {
-    public interface INewCarImageRepository : IGenericRepositoryAsync<NewCarImage>
+    public interface INewCarImageServices
     {
         Task<List<NewCarImage>> GetByPostIdAsync(int newCarPostId);
         Task<bool> ExistsByHashAsync(string hash, string sellerId);
         Task<bool> ExistsByHashAsync(string hash, int newCarPostId, string sellerId);
+        Task AddRangeAsync(ICollection<NewCarImage> images);
+        Task<NewCarImage> GetByIdAsync(int imageId);
+        Task DeleteAsync(NewCarImage image);
     }
 }

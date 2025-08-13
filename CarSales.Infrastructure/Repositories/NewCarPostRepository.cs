@@ -1,6 +1,7 @@
 ﻿using CarSales.Domain.Entities.Posts;
 using CarSales.Domain.IRepositories;
 using CarSales.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,12 @@ namespace CarSales.Infrastructure.Repositories
         public NewCarPostRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
+        }
+
+        public async Task<NewCarPost> GetByIdAsync(string userId, int id)
+        {
+            var post = await _context.NewCarPosts.FirstOrDefaultAsync(i => i.Id == id && i.SellerId == userId);
+            return post;
         }
     }
 }

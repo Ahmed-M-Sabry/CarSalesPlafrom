@@ -43,9 +43,9 @@ namespace CarSales.Infrastructure
             services.AddTransient<IFuelTypeRepository, FuelTypeRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IOldCarPostRepository, OldCarPostRepository>();
-            services.AddTransient<INewCarImageRepository, NewCarImageRepository>();
-            services.AddTransient<INewCarImageRepository, NewCarImageRepository>();
             services.AddTransient<IUsedCarImageRepository, UsedCarImageRepository>();
+            services.AddTransient<INewCarImageRepository, NewCarImageRepository>();
+            services.AddTransient<INewCarPostRepository, NewCarPostRepository>();
 
             return services;
         }

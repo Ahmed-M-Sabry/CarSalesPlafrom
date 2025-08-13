@@ -15,6 +15,10 @@ using CarSales.Application.Features.GetUsedCarImagesFeatures.Commands.Models;
 using CarSales.Application.Features.GetUsedCarImagesFeatures.Commands.Validator;
 using CarSales.Application.Features.GetUsedCarImagesFeatures.Queries.Models;
 using CarSales.Application.Features.GetUsedCarImagesFeatures.Queries.Validator;
+using CarSales.Application.Features.NewCarImageFeatures.Command.Model;
+using CarSales.Application.Features.NewCarImageFeatures.Command.Validator;
+using CarSales.Application.Features.NewCarImageFeatures.Queries.Model;
+using CarSales.Application.Features.NewCarImageFeatures.Queries.Validator;
 using CarSales.Application.Features.PostsFeatures.Commands.Models;
 using CarSales.Application.Features.PostsFeatures.Commands.SpecificServices;
 using CarSales.Application.Features.PostsFeatures.Commands.Validator;
@@ -71,11 +75,17 @@ namespace CarSales.Application
             services.AddScoped<IValidator<CreateOldCarPostCommand>, CreateOldCarPostValidator>();
             services.AddScoped<IValidator<EditOldCarPostCommands>, EditOldCarPostValidator>();
 
+            //old Image
             services.AddScoped<IValidator<GetUsedCarImagesByPostIdQuery>, GetUsedCarImagesByPostIdQueryValidator>();
             services.AddScoped<IValidator<GetImageByIdQurey>, GetImageByIdQueryValidator>();
             services.AddScoped<IValidator<DeleteImageFromOldCarPostCommand>, DeleteImageFromOldCarPostCommandValidator>();
             services.AddScoped<IValidator<AddImagesToOldCarPostCommand>, AddImagesToOldCarPostCommandValidator>();
 
+            // new Image
+            services.AddScoped<IValidator<AddImagesToNewCarPostCommand>, AddImagesToNewCarPostCommandValidator>();
+            services.AddScoped<IValidator<DeleteImageFromNewCarPostCommand>, DeleteImageFromNewCarPostCommandValidator>();
+            services.AddScoped<IValidator<GetNewCarImagesByPostIdQuery>, GetNewCarImagesByPostIdQueryValidator>();
+            services.AddScoped<IValidator<GetNewImageByIdQurey>, GetNewImageByIdQueryValidator>();
 
             // Specific Srevice
             services.AddTransient<ICarPostEditServices, CarPostEditServices>();
