@@ -93,6 +93,7 @@ namespace CarSales.Application
             services.AddTransient<ICarPostCreateServices, CarPostCreateServices>();
 
             services.AddTransient<INewCarPostCreateServices, NewCarPostEditServices>();
+            services.AddTransient<IEditNewPostServices, EditNewPostServices>();
 
 
 

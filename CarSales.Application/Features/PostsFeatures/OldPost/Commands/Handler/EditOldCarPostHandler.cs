@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace CarSales.Application.Features.PostsFeatures.OldPost.Commands.Handler
 {
-    internal class EditOldCarPostHandler : IRequestHandler<EditOldCarPostCommands, Result<OldCarPost>>
+    public class EditOldCarPostHandler : IRequestHandler<EditOldCarPostCommands, Result<OldCarPost>>
     {
         private readonly ICarPostEditServices _carPostEditServices;
         private readonly IUserContextService _userContextService;

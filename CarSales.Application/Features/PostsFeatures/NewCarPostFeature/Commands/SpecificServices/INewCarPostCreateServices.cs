@@ -21,20 +21,17 @@ namespace CarSales.Application.Features.PostsFeatures.NewCarPostFeature.Commands
 
     public class NewCarPostEditServices : INewCarPostCreateServices
     {
-        private readonly IOldCarPostService _postService;
         private readonly IBrandService _brandService;
         private readonly IModelService _modelService;
         private readonly IFuelTypeService _fuelTypeService;
         private readonly ITransmissionTypeService _transmissionTypeService;
 
         public NewCarPostEditServices(
-            IOldCarPostService postService,
             IBrandService brandService,
             IModelService modelService,
             IFuelTypeService fuelTypeService,
             ITransmissionTypeService transmissionTypeService)
         {
-            _postService = postService;
             _brandService = brandService;
             _modelService = modelService;
             _fuelTypeService = fuelTypeService;

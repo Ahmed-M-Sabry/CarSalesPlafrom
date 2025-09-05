@@ -13,6 +13,10 @@ namespace CarSales.Application.Mappings
                 .ForMember(dest => dest.Images, opt => opt.Ignore()) 
                 .ForMember(dest => dest.SellerId, opt => opt.Ignore()) 
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore());
+
+            CreateMap<EditNewCarPostCommand, NewCarPost>()
+                .ForMember(dest => dest.Images, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore());
         }
     }
 }
