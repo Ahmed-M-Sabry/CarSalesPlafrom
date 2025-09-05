@@ -38,10 +38,10 @@ namespace CarSales.Application.Features.GetUsedCarImagesFeatures.Queries.Handler
         if (image == null)
             return Result<UsedCarImage>.Failure("Image not found.", ErrorType.NotFound);
 
-        // Check if the user owns the post associated with the image
-        var postResult = await _postService.GetByIdAsync(userId, image.OldCarPostId, cancellationToken);
-        if (!postResult.IsSuccess)
-            return Result<UsedCarImage>.Failure("You are not authorized to access this image.", ErrorType.Unauthorized);
+        //// Check if the user owns the post associated with the image
+        //var postResult = await _postService.GetByIdAsync(userId, image.OldCarPostId, cancellationToken);
+        //if (!postResult.IsSuccess)
+        //    return Result<UsedCarImage>.Failure("You are not authorized to access this image.", ErrorType.Unauthorized);
 
         return Result<UsedCarImage>.Success(image);
     }

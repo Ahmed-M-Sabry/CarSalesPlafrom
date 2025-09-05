@@ -36,8 +36,8 @@ namespace CarSales.Application.Features.GetUsedCarImagesFeatures.Queries.Handler
                 return Result<List<UsedCarImage>>.Failure("User must be authenticated to view images.", ErrorType.Unauthorized);
 
             // Check if the OldCarPost exists and user has access
-            var postResult = await _postService.GetByIdAsync(userId, request.OldCarPostId, cancellationToken);
-            if (!postResult.IsSuccess)
+            var postResult = await _postService.GetByIdAsync(request.OldCarPostId);
+            if (postResult is null)
                 return Result<List<UsedCarImage>>.Failure("Not Car Post Found", ErrorType.NotFound);
 
             // Fetch images from service

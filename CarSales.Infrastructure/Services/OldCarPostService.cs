@@ -38,6 +38,11 @@ namespace CarSales.Infrastructure.Services
             return Result<OldCarPost>.Success(post);
         }
 
+        public async Task<OldCarPost> GetByIdAsync(int id)
+        {
+            return  await _oldCarPostRepository.GetByIdAsync(id);
+        }
+
         public async Task UpdateAsync(OldCarPost oldCarPost, CancellationToken cancellationToken = default)
         {
             await _oldCarPostRepository.UpdateAsync(oldCarPost);

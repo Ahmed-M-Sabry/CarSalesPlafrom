@@ -13,6 +13,7 @@ namespace CarSales.Application.IServices
     {
         Task<Result<NewCarPost>> CreateAsync(NewCarPost post, CancellationToken cancellationToken = default);
         Task<Result<NewCarPost>> GetByIdAsync(string userId, int id, CancellationToken cancellationToken = default);
+        Task<NewCarPost> GetByIdAsync(int id);
         Task UpdateAsync(NewCarPost oldCarPost, CancellationToken cancellationToken = default);
     }
 }
