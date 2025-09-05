@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using CarSales.Application.Features.PostsFeatures.Commands.Dots;
-using CarSales.Application.Features.PostsFeatures.Commands.Models;
+using CarSales.Application.Features.PostsFeatures.OldPost.Commands.Models;
 using CarSales.Domain.Entities.Posts;
 using System;
 using System.Collections.Generic;

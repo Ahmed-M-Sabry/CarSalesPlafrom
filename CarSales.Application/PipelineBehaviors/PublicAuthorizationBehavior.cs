@@ -9,7 +9,8 @@ using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Queries.Mod
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Queries.Models;
 using CarSales.Application.Features.GetUsedCarImagesFeatures.Queries.Models;
-using CarSales.Application.Features.PostsFeatures.Commands.Models;
+using CarSales.Application.Features.PostsFeatures.NewCarPostFeature.Commands.Models;
+using CarSales.Application.Features.PostsFeatures.OldPost.Commands.Models;
 using CarSales.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -45,6 +46,10 @@ namespace CarSales.Application.PipelineBehaviors
                 typeof(EditOldCarPostCommands),
                 typeof(GetUsedCarImagesByPostIdQuery),
 
+
+                // New Post
+                typeof(CreateNewCarPostCommand),
+                typeof(EditNewCarPostCommand)
 
             };
 

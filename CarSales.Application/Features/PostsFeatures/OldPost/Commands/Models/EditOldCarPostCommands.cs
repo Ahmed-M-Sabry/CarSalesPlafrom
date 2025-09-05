@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Application.Features.PostsFeatures.Commands.Models
+namespace CarSales.Application.Features.PostsFeatures.OldPost.Commands.Models
 {
     public class EditOldCarPostCommands : IRequest<Result<OldCarPost>>
     {

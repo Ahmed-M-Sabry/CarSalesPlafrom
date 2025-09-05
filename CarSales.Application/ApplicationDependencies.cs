@@ -19,9 +19,10 @@ using CarSales.Application.Features.NewCarImageFeatures.Command.Model;
 using CarSales.Application.Features.NewCarImageFeatures.Command.Validator;
 using CarSales.Application.Features.NewCarImageFeatures.Queries.Model;
 using CarSales.Application.Features.NewCarImageFeatures.Queries.Validator;
-using CarSales.Application.Features.PostsFeatures.Commands.Models;
-using CarSales.Application.Features.PostsFeatures.Commands.SpecificServices;
-using CarSales.Application.Features.PostsFeatures.Commands.Validator;
+using CarSales.Application.Features.PostsFeatures.NewCarPostFeature.Commands.SpecificServices;
+using CarSales.Application.Features.PostsFeatures.OldPost.Commands.Models;
+using CarSales.Application.Features.PostsFeatures.OldPost.Commands.SpecificServices;
+using CarSales.Application.Features.PostsFeatures.OldPost.Commands.Validator;
 using CarSales.Application.Features.UsedCarImages.Validator;
 using CarSales.Application.PipelineBehaviors;
 using FluentValidation;
@@ -90,6 +91,10 @@ namespace CarSales.Application
             // Specific Srevice
             services.AddTransient<ICarPostEditServices, CarPostEditServices>();
             services.AddTransient<ICarPostCreateServices, CarPostCreateServices>();
+
+            services.AddTransient<INewCarPostCreateServices, NewCarPostEditServices>();
+
+
 
             return services;
         }

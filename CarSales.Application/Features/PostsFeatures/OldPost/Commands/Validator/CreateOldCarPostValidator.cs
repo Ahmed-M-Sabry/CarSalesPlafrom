@@ -1,4 +1,4 @@
-﻿using CarSales.Application.Features.PostsFeatures.Commands.Models;
+﻿using CarSales.Application.Features.PostsFeatures.OldPost.Commands.Models;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Application.Features.PostsFeatures.Commands.Validator
+namespace CarSales.Application.Features.PostsFeatures.OldPost.Commands.Validator
 {
-    internal class EditOldCarPostValidator : AbstractValidator<EditOldCarPostCommands>
+    internal class CreateOldCarPostValidator : AbstractValidator<CreateOldCarPostCommand>
     {
-        public EditOldCarPostValidator()
+        public CreateOldCarPostValidator()
         {
             RuleFor(p => p.Title)
                 .NotEmpty().WithMessage("Title is required.")
@@ -42,6 +42,9 @@ namespace CarSales.Application.Features.PostsFeatures.Commands.Validator
                 .NotEmpty().WithMessage("Phone number is required.")
                 .Matches(@"^\+?\d{10,15}$").WithMessage("Invalid phone number format.");
 
+            RuleFor(p => p.Images)
+                .Must(images => images == null || images.All(img => img.Length <= 5 * 1024 * 1024))
+                .WithMessage("Each File must be less than 5MB.");
         }
     }
 }

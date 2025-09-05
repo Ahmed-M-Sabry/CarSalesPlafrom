@@ -8,7 +8,6 @@ using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Commands.Mo
 using CarSales.Application.Features.CarDetailsFeatures.ModelFeatures.Queries.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Commands.Models;
 using CarSales.Application.Features.CarDetailsFeatures.TransmissionTypeFeatures.Queries.Models;
-using CarSales.Application.Features.PostsFeatures.Commands.Models;
 using CarSales.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -49,6 +48,8 @@ namespace CarSales.Application.PipelineBehaviors
                 
                 
                 // Get All
+
+
                 
 
             };

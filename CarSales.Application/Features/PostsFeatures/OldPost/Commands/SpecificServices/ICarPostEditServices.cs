@@ -1,5 +1,5 @@
 ﻿using CarSales.Application.Common;
-using CarSales.Application.Features.PostsFeatures.Commands.Models;
+using CarSales.Application.Features.PostsFeatures.OldPost.Commands.Models;
 using CarSales.Application.IServices;
 using CarSales.Application.IServices.CarDetailsServices;
 using CarSales.Application.IServices.ICarDetailsServices;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Application.Features.PostsFeatures.Commands.SpecificServices
+namespace CarSales.Application.Features.PostsFeatures.OldPost.Commands.SpecificServices
 {
     public interface ICarPostEditServices
     {

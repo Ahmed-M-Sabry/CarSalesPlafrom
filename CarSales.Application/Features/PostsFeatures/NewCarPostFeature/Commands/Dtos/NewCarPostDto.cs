@@ -1,39 +1,25 @@
-﻿using CarSales.Domain.Entities.CarDetails;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
-namespace CarSales.Domain.Entities.Posts
+namespace CarSales.Application.Features.PostsFeatures.NewCarPostFeature.Commands.Dtos
 {
-    public class NewCarPost
+    public class NewCarPostDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
 
         public int BrandId { get; set; }
-        [JsonIgnore]
-
-        public Brand Brand { get; set; }
+        public string BrandName { get; set; }
 
         public int ModelId { get; set; }
-        [JsonIgnore]
-
-        public Model Model { get; set; }
-
+        public string ModelName { get; set; }
 
         public int FuelTypeId { get; set; }
-        [JsonIgnore]
-
-        public FuelType FuelType { get; set; }
+        public string FuelTypeName { get; set; }
 
         public int TransmissionTypeId { get; set; }
-        [JsonIgnore]
-
-        public TransmissionType TransmissionType { get; set; }
+        public string TransmissionTypeName { get; set; }
 
         public decimal Price { get; set; }
         public decimal? DownPayment { get; set; }
@@ -44,12 +30,10 @@ namespace CarSales.Domain.Entities.Posts
         public string? Address { get; set; }
 
         public string SellerId { get; set; }
-        [JsonIgnore]
-
-        public ApplicationUser Seller { get; set; }
+        public string SellerName { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
-        public ICollection<NewCarImage> Images { get; set; }
+        public List<string> ImageUrls { get; set; }
     }
 }

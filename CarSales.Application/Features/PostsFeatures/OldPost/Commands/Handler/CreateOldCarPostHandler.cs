@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CarSales.Application.Common;
-using CarSales.Application.Features.PostsFeatures.Commands.Models;
+using CarSales.Application.Features.PostsFeatures.OldPost.Commands.Models;
+using CarSales.Application.Features.PostsFeatures.OldPost.Commands.SpecificServices;
 using CarSales.Application.IServices;
 using CarSales.Domain.Entities.CarDetails;
 using CarSales.Domain.Entities.Posts;
@@ -13,7 +14,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarSales.Application.Features.PostsFeatures.Commands.Handler
+namespace CarSales.Application.Features.PostsFeatures.OldPost.Commands.Handler
 {
     public class CreateOldCarPostHandler : IRequestHandler<CreateOldCarPostCommand, Result<OldCarPost>>
     {
@@ -22,19 +23,22 @@ namespace CarSales.Application.Features.PostsFeatures.Commands.Handler
         private readonly IMapper _mapper;
         private readonly IUserContextService _userContextService;
         private readonly IUsedCarImageServices _usedCarImageServices;
+        private readonly ICarPostCreateServices _carPostCreateSevicses;
 
         public CreateOldCarPostHandler(
             IOldCarPostService postService,
             IFileService fileService,
             IMapper mapper,
             IUserContextService userContextService,
-            IUsedCarImageServices usedCarImageServices)
+            IUsedCarImageServices usedCarImageServices,
+           ICarPostCreateServices carPostCreateSevicses)
         {
             _postService = postService;
             _fileService = fileService;
             _mapper = mapper;
             _userContextService = userContextService;
             _usedCarImageServices = usedCarImageServices;
+            _carPostCreateSevicses = carPostCreateSevicses;
         }
 
         public async Task<Result<OldCarPost>> Handle(CreateOldCarPostCommand request, CancellationToken cancellationToken)
@@ -42,6 +46,10 @@ namespace CarSales.Application.Features.PostsFeatures.Commands.Handler
             var userId = _userContextService.GetUserId();
             if (string.IsNullOrEmpty(userId))
                 return Result<OldCarPost>.Failure("User must be authenticated to create a post.", ErrorType.Unauthorized);
+
+            var validationResult = await _carPostCreateSevicses.ValidateCreateAsync(request, cancellationToken);
+            if (!validationResult.IsSuccess)
+                return validationResult;
 
             var post = _mapper.Map<OldCarPost>(request);
             post.SellerId = userId;

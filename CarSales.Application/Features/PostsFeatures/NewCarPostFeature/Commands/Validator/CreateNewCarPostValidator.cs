@@ -1,4 +1,4 @@
-﻿using CarSales.Application.Features.PostsFeatures.Commands.Models;
+﻿using CarSales.Application.Features.PostsFeatures.NewCarPostFeature.Commands.Models;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Application.Features.PostsFeatures.Commands.Validator
+namespace CarSales.Application.Features.PostsFeatures.NewCarPostFeature.Commands.Validator
 {
-    internal class CreateOldCarPostValidator : AbstractValidator<CreateOldCarPostCommand>
+    public class CreateNewCarPostValidator : AbstractValidator<CreateNewCarPostCommand>
     {
-        public CreateOldCarPostValidator()
+        public CreateNewCarPostValidator()
         {
             RuleFor(p => p.Title)
                 .NotEmpty().WithMessage("Title is required.")
@@ -23,17 +23,10 @@ namespace CarSales.Application.Features.PostsFeatures.Commands.Validator
                 .GreaterThan(0).WithMessage("Model ID must be greater than 0.");
 
             RuleFor(p => p.FuelTypeId)
-                .GreaterThan(0).WithMessage("Fuel Type ID must be greater than 0.");
+                .GreaterThan(0).WithMessage("FuelType ID must be greater than 0.");
 
             RuleFor(p => p.TransmissionTypeId)
-                .GreaterThan(0).WithMessage("Transmission Type ID must be greater than 0.");
-
-            RuleFor(p => p.Year)
-                .GreaterThan(1900).WithMessage("Year must be greater than 1900.")
-                .LessThanOrEqualTo(DateTime.UtcNow.Year).WithMessage("Year cannot be in the future.");
-
-            RuleFor(p => p.MileageKm)
-                .GreaterThanOrEqualTo(0).WithMessage("Mileage cannot be negative.");
+                .GreaterThan(0).WithMessage("TransmissionType ID must be greater than 0.");
 
             RuleFor(p => p.Price)
                 .GreaterThan(0).WithMessage("Price must be greater than 0.");
